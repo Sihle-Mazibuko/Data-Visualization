@@ -44,11 +44,11 @@
 
       <nav>
         <ul class="navlist">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#blog">Blogs</a></li>
-          <li><a href="#Designs">Designs</a></li>
-          <li><a href="#weather-visuals">Weather Visualisation</a></li>
-          <li><a href="#weather-art">Weather Art</a></li>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/#blogs">Blogs</a></li>
+          <li><a href="/#Designs">Designs</a></li>
+          <li><a href="/#weather-visuals">Weather Visualisation</a></li>
+          <li><a href="/#weather-art">Weather Art</a></li>
         </ul>
       </nav>
     </header>
@@ -56,9 +56,10 @@
       <section class="home"></section>
 
       <section class="blogs">
-        <h2 class="section-title">Blogs</h2>
+        <h2 class="heading">Blogs</h2>
         <ul class="blogs-container">
           <li class="blog-box">
+            <input id="ch1" type="checkbox" />
             <h3>Overview of Data Visualisation</h3>
             <p class="blog-preview">
               This blog reflects Qi Li’s
@@ -73,20 +74,26 @@
               Dicta officiis aliquam corrupti voluptatibus ut eveniet ipsum
               error aspernatur doloribus aut dignissimos facilis, ullam ipsam.
             </p>
-            <span class="read-more-btn">Read more</span>
+            <label for="ch1">Read more</label>
           </li>
 
           <li class="blog-box">
+            <input id="ch2" type="checkbox" />
+
             <h3>Critical Reflection of UI and UX</h3>
-            <p class="blog-preview">This blog reflects my proposed UI and UX</p>
+            <p class="blog-preview">
+              This blog reflects on my proposed UI and UX
+            </p>
 
             <p class="blog-content">No content to display</p>
-            <span class="read-more-btn">Read more</span>
+            <label for="ch2">Read more</label>
           </li>
         </ul>
       </section>
 
       <section class="Designs">
+        <h2 class="heading">Wireframes</h2>
+
         <div class="items">
           <div class="sub-box">
             <div class="sub-img">
@@ -144,7 +151,11 @@
 
       <section class="weather-art"></section>
     </main>
-    <footer></footer>
+    <footer>
+      <div class="out">
+        <p>Made by Sihle Mazibuko</p>
+      </div>
+    </footer>
     <script type="text/javascript" src="./JS/app.js"></script>
   </body>
 </html>

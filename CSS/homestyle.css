@@ -225,10 +225,70 @@ header {
   box-shadow: 0 0 0.2rem black;
 }
 
-.read-more-btn {
-  color: blue;
+.blog-box h3 {
+  margin-bottom: 10px;
+  letter-spacing: 0.07rem;
 }
 
-.read-more-btn--show {
-  display: inline;
+.blog-box p {
+  line-height: 1.4;
+  text-align: justify;
+  margin-bottom: 5px;
+}
+
+#ch1,
+#ch2 {
+  display: none;
+}
+
+.blog-content {
+  display: none;
+  transition: 0.4s linear;
+}
+
+.blogs label {
+  font-size: 0.75rem;
+  display: inline-block;
+  margin-top: 10px;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#ch1:checked ~ .blog-content,
+#ch2:checked ~ .blog-content {
+  display: block;
+}
+
+#ch1:checked ~ label,
+#ch2:checked ~ label {
+  visibility: hidden;
+}
+
+#ch1:checked ~ label::after,
+#ch2:checked ~ label::after {
+  content: "Show less";
+  display: block;
+  visibility: visible;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 7px 0 20px;
+  line-height: 1.1;
+}
+
+.out {
+  text-align: center;
+  padding: 20px;
+}
+
+.out p {
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0.4;
+  color: rgb(0, 0, 0);
 }
