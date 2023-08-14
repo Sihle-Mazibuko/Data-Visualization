@@ -274,6 +274,11 @@ header {
   content: "Show less";
   display: block;
   visibility: visible;
+
+  .ref-hold a {
+    color: gray;
+    text-decoration: underline;
+  }
 }
 
 .heading {
@@ -297,7 +302,7 @@ header {
 }
 
 .home {
-  background-image: url(./images/background.jpg);
+  background-image: url(/images/background.jpg);
   background-position: bottom;
   background-size: cover;
   padding: 5rem;
@@ -367,4 +372,40 @@ header {
   line-height: 20px;
   margin-bottom: 15px;
   font-style: italic;
+}
+
+.ref-hold {
+  padding: 20px;
+}
+
+.ref h4 {
+  font-size: large;
+}
+
+.reference {
+  font-size: 0.9rem;
+}
+.reference pre {
+  font-size: 0.9rem;
+}
+
+.reference a {
+  color: gray;
+  text-decoration: underline;
+}
+
+.current-weather {
+  background-color: #aa28047d;
+  padding: 2em;
+  max-width: 1000px;
+  margin: 4em 0 0 4em;
+}
+
+.home h1,
+.home h2,
+.home h3 {
+  line-height: 4;
+}
+
+.main-title {
 }
