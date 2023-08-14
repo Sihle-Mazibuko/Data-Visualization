@@ -297,7 +297,7 @@ header {
 }
 
 .home {
-  background-image: url(/images/mars\ background.jpg);
+  background-image: url(./images/mars\ background.jpg);
   background-position: bottom;
   background-size: cover;
   padding: 5rem;
