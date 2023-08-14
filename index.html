@@ -46,14 +46,48 @@
         <ul class="navlist">
           <li><a href="#">Home</a></li>
           <li><a href="#blogs">Blogs</a></li>
-          <li><a href="#Designs">Designs</a></li>
+          <li><a href="#designs">Designs</a></li>
           <li><a href="#weather-visuals">Weather Visualisation</a></li>
           <li><a href="#weather-art">Weather Art</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <section class="home"></section>
+      <section class="home">
+        <div class="current-weather">
+          <h1 class="main-tltle sol-day">Sol 3902</h1>
+          <p class="date-day">December 19th</p>
+          <div class="temp">
+            <h2 class="section-title-temp section-title">
+              <p class="reading low-temp">High: -20°C</p>
+              <p class="reading high-temp">Low: -240°C</p>
+            </h2>
+          </div>
+          <div class="wind">
+            <h2 class="section-title section-title-wind">
+              <p class="reading">75 kmph</p>
+              <div class="wind-direction">
+                <p class="screen-reader">45deg</p>
+                <div class="wind-arrow"></div>
+              </div>
+            </h2>
+          </div>
+          <div class="measure-unit">
+            <label for="cel">°C</label>
+            <input type="radio" id="cel" name="measure-unit" checked />
+            <button class="unit-toggle"></button>
+            <label for="fah">°F</label>
+            <input type="radio" id="fah" name="measure-unit" />
+          </div>
+        </div>
+
+        <h3 class="heading">Latest Sol Day weather</h3>
+        <p>
+          This website supplies the latest weather data on Mars as per NASAs
+          InSight rover and other useful climate information on the red planet.
+          Information on the creative journey of the website is also provided.
+        </p>
+      </section>
 
       <section class="blogs">
         <h2 class="heading">Blogs</h2>
@@ -65,15 +99,55 @@
               This blog reflects Qi Li’s
               <span>Overview of Data Visualization</span>
             </p>
-            <p class="blog-content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-              provident iure tenetur qui accusamus voluptatem eum iste,
-              consequuntur quaerat aperiam. Quis repellat ab recusandae? Nam,
-              maiores. Esse odit alias similique. Vel facere ut, porro
-              blanditiis libero eaque voluptas hic animi expedita illum ab sed!
-              Dicta officiis aliquam corrupti voluptatibus ut eveniet ipsum
-              error aspernatur doloribus aut dignissimos facilis, ullam ipsam.
-            </p>
+            <pre class="blog-content">
+                This reading on data visualizations provides a multitude of insights regarding what exactly data
+                visualisation is, breaking down the components that make up data visualization (data and
+                information), the various ways in which data visualization is depicted and how we interpret the data
+                being depicted.
+
+                Being foreign to the concept of visualization I did not have a clear grasp of the topic. Li and contributors
+                such as Mackinlay, Schneidermann, Kirk, Reyna, Nelson, etc provided various definitions that provided
+                useful insight on the topic but also allowed me to come up with my definition based on my
+                understanding of the information presented. Data visualization is the process of presenting data
+                graphically, which in turn provides the observer with a way of exploring and analysing data, allowing
+                them to detect patterns, correlations and causes in the data sets provided. From this definition, as
+                well as others in the reading. Data visualization as a process can achieve this by “exploring real-time
+                interaction, on-the-fly processing, visual scalability and user assistance and personalization” (Li, 2020).
+                It is also important to note that data visualization consists of data which is unprocessed information
+                that cannot be comprehended (which is further split into primary and secondary data), and
+                information is data that is processed and can be understood and read. This definition covers the three
+                main characteristics of data visualization which are the readability of the data, how the data can be
+                recognized from previous iterations and the meaning generated from the form of the visualization.
+                There are various forms of visualization techniques used to depict data sets and some of these include
+                trees, scatter plots, charts, diagrams etc. Data visualization can be further understood by classifying it
+                into two categories: information visualization which is more organized and displayed as a way of
+                ensuring users gain the information they may need and scientific visualization whereby the
+                visualization forms are simulated as opposed to those in information visualization which are design
+                control systems. Going back to the forms of data visualization the reading lists numerous amounts but
+                the ones that stood out to me include simulations and volumes and the different types of volumes.
+                The reason for this interest is that I have either never seen these forms of visualization or the
+                technique interests me. Simulation is the latter as it is more interactive (in some cases) and can display
+                interesting data regarding natural phenomena. Volume is interesting due to the vast forms it can take
+                on and thus providing a wide selection of ways to visualize data. Some of these techniques are but not
+                limited to, emulation which allows transitions to a modern technic from older ones, sliced-based
+                which uses a “low computing complexity” (Li, 2020) to visualize certain parts of data and volume
+                rendering which converts 3-dimensional data into a 2-dimensional visualization.
+
+                Data visualization as practice seems to be a simple and very useful technique which provides various
+                benefits to its users such as being able to take in large amounts of data countering efficiencies, show
+                errors or inaccuracies in data, reveal trends and patterns, can tell a story to the viewer, optimizing
+                data reports, cutting labour costs, etc. But these affordances can only be achieved by selecting the
+                correct visualization and for my assessment’s simulations, graphs and tables are seemingly the best
+                techniques to use. Displaying that large amount of data from NASAs APIs can be challenging thus using
+                tables and charts (which Li considers to be one the best ways to display data, tables specifically for
+                numerical data) along with some sort of simulation for the user to interact with, the website and its
+                content will be easily readable, understandable by the viewer and information can be easily extracted
+                from it. A practical example of one of the visualisations and its effectiveness is weather.com, which
+                predominately tables that list weather information regarding any inputted areas. What makes this
+                visualization effective is firstly tables are excellent for numerical values (wind speed, temperature,
+                etc.) as well as the design options afforded by tables allow it to look legible and comprehensible on
+                the website which is something that can be useful for my own design choices
+            </pre>
             <label for="ch1">Read more</label>
           </li>
 
@@ -91,7 +165,7 @@
         </ul>
       </section>
 
-      <section class="Designs">
+      <section class="designs">
         <h2 class="heading">Wireframes</h2>
 
         <div class="items">
@@ -145,11 +219,19 @@
             </p>
           </div>
         </div>
+
+        <h2 class="heading">Style guide</h2>
       </section>
 
-      <section class="weather-visuals"></section>
+      <section class="weather-visuals">
+        <h2 class="heading">Weather visualizations</h2>
+        <p>No content to display</p>
+      </section>
 
-      <section class="weather-art"></section>
+      <section class="weather-art">
+        <h2 class="heading">Weather art visualisation</h2>
+        <p>No content to display</p>
+      </section>
     </main>
     <footer>
       <div class="out">

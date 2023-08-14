@@ -9,8 +9,8 @@
 }
 
 body {
-  background: whitesmoke;
-  color: black;
+  background: black;
+  color: white;
 }
 section {
   padding: 100px 18%;
@@ -32,7 +32,7 @@ header {
 
 .logo img {
   max-width: 100%;
-  width: 60px;
+  width: 40px;
   height: auto;
 }
 
@@ -46,7 +46,7 @@ header {
 
 .navlist a {
   font-size: 13px;
-  color: black;
+  color: white;
   font-weight: 500;
   padding: 10px 20px;
 }
@@ -56,7 +56,7 @@ header {
   position: absolute;
   width: 0;
   height: 2px;
-  background: wheat;
+  background: red;
   bottom: -3px;
   left: 0;
   transition: ease 0.2s;
@@ -68,7 +68,7 @@ header {
 
 #menu-icon {
   font-size: 20px;
-  color: black;
+  color: white;
   z-index: 10001;
   cursor: pointer;
   display: none;
@@ -77,8 +77,8 @@ header {
 .top-btn {
   display: inline-block;
   padding: 5px 10x;
-  border-bottom: 1px solid black;
-  color: black;
+  border-bottom: 1px solid white;
+  color: white;
   letter-spacing: 1px;
   font-size: 12px;
   font-weight: 300;
@@ -114,13 +114,13 @@ header {
 
 .sub-box p {
   font-size: 15px;
-  color: rgba(0, 0, 0, 0.662);
+  color: white;
   line-height: 20px;
 }
 
 .sub-box:hover {
-  background: white;
-  box-shadow: 18px 0 87px 0 rgb(10 15 70/7%);
+  background: rgba(79, 79, 79, 0.362);
+  box-shadow: 18px 0 87px 0 rgba(210, 210, 210, 0.503);
   border-radius: 12px;
   will-change: transform;
   transform: perspective(1000px) rotateX(1.8deg) rotateY(10.23deg)
@@ -157,7 +157,7 @@ header {
     left: 0;
     right: 0;
     flex-direction: column;
-    background: wheat;
+    background: rgb(93, 93, 93);
     text-align: left;
     transition: all 0.4s;
   }
@@ -170,8 +170,8 @@ header {
   }
 
   .navlist a:hover {
-    background: black;
-    color: white;
+    background: white;
+    color: black;
   }
 
   .navlist a::after {
@@ -219,10 +219,10 @@ header {
 
 .blog-box {
   padding: 2rem 2rem;
-  background-color: white;
+  background-color: gray;
   border-radius: 2px;
   line-height: 1.4rem;
-  box-shadow: 0 0 0.2rem black;
+  box-shadow: 0 0 0.2rem white;
 }
 
 .blog-box h3 {
@@ -242,15 +242,18 @@ header {
 }
 
 .blog-content {
+  padding-top: 5px;
   display: none;
   transition: 0.4s linear;
+  line-height: 1.8;
+  text-align: justify;
 }
 
 .blogs label {
   font-size: 0.75rem;
   display: inline-block;
   margin-top: 10px;
-  color: blue;
+  color: whitesmoke;
   text-decoration: underline;
   cursor: pointer;
   font-weight: 600;
@@ -290,5 +293,13 @@ header {
   font-size: 12px;
   letter-spacing: 1px;
   opacity: 0.4;
-  color: rgb(0, 0, 0);
+  color: rgb(168, 168, 168);
+}
+
+.home {
+  background-image: url(/images/mars\ background.jpg);
+  background-position: bottom;
+  background-size: cover;
+  padding: 5rem;
+  min-height: 70vh;
 }
