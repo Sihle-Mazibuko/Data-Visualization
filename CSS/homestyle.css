@@ -303,3 +303,68 @@ header {
   padding: 5rem;
   min-height: 70vh;
 }
+
+.colour-swatch {
+  background-color: rgba(128, 128, 128, 0.353);
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 30px 30px -15px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colour-swatch ul {
+  list-style: none;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+.colour-swatch ul li {
+  width: 24px;
+  height: 24px;
+  background-color: #aa2704;
+  border-radius: 50%;
+}
+
+.colour-swatch ul li:hover {
+  transform: scale(1.1);
+}
+
+#rusty-red {
+  background-color: #aa2704;
+}
+#black {
+  background-color: black;
+}
+#white {
+  background-color: white;
+}
+#gray {
+  background-color: gray;
+}
+
+.style-title {
+  margin-top: 25px;
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+}
+
+.style-text p,
+.style-text pre {
+  font-size: 17px;
+  color: rgb(255, 255, 255);
+  line-height: 20px;
+  margin-bottom: 15px;
+}
+
+.style-text span {
+  font-size: 17px;
+  color: rgb(255, 255, 255);
+  line-height: 20px;
+  margin-bottom: 15px;
+  font-style: italic;
+}
