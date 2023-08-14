@@ -210,20 +210,25 @@ header {
   }
 }
 
-.section-title h2 {
-  font-size: 18px;
-  font-weight: 300;
-  margin: 7px 0 20px;
-  line-height: 1.1;
+.blogs-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 80px;
 }
 
-.blog-box p {
-  font-size: 26px;
-  line-height: 24px;
-  margin: 5px 0 10px;
+.blog-box {
+  padding: 2rem 2rem;
+  background-color: white;
+  border-radius: 2px;
+  line-height: 1.4rem;
+  box-shadow: 0 0 0.2rem black;
 }
 
-.blog-box p span {
-  font-style: italic;
-  font-size: larger;
+.read-more-btn {
+  color: blue;
+}
+
+.read-more-btn--show {
+  display: inline;
 }
