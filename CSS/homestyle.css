@@ -302,7 +302,7 @@ header {
 }
 
 .home {
-  background-image: url(/images/background.jpg);
+  background-image: url(./images/background.jpg);
   background-position: bottom;
   background-size: cover;
   padding: 5rem;
