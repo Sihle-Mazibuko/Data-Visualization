@@ -24,6 +24,6 @@ blogBoxes.forEach((blogBox) => {
 
 function BlogClick() {
   window.location.replace(
-    "https://sihle-mazibuko.github.io/Portfolio/blogpages.html"
+    "https://sihle-mazibuko.github.io/Data-Visualization/blogs.html"
   );
 }
