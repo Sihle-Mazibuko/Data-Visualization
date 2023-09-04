@@ -23,7 +23,7 @@ blogBoxes.forEach((blogBox) => {
 });
 
 function BlogClick() {
-  window.location.replace(
+  window.location(
     "https://sihle-mazibuko.github.io/Data-Visualization/blogs.html"
   );
 }
