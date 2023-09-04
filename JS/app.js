@@ -17,7 +17,7 @@ window.onscroll = () => {
   navlist.classList.remove("active");
 };
 
-const blogBoxes = document.querySelectorAll(".blog-box");
+const blogBoxes = document.querySelectorAll(".blogs");
 blogBoxes.forEach((blogBox) => {
   blogBox.addEventListener("click", () => BlogClick());
 });
