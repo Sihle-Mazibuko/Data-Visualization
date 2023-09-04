@@ -358,8 +358,7 @@ header {
   color: white;
 }
 
-.style-text p,
-.style-text pre {
+.style-text p {
   font-size: 17px;
   color: rgb(255, 255, 255);
   line-height: 20px;
@@ -474,4 +473,12 @@ header {
 
   transform-origin: bottom center;
   transition: transform 500ms ease;
+}
+
+.other {
+  margin-top: 10px;
+}
+
+* {
+  text-align: left;
 }

@@ -16,3 +16,14 @@ window.onscroll = () => {
   menu.classList.remove("bx-x");
   navlist.classList.remove("active");
 };
+
+const blogBoxes = document.querySelectorAll(".blog-box");
+blogBoxes.forEach((blogBox) => {
+  blogBox.addEventListener("click", () => BlogClick());
+});
+
+function BlogClick() {
+  window.location.replace(
+    "https://sihle-mazibuko.github.io/Portfolio/blogpages.html"
+  );
+}
