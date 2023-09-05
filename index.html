@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="This website displays the weather on Mars as per the NASA InSight Mars lander as well as supplies information on the website's creation and its creative journey by the creator of the website Sihle Mazibuko"
+      content="This website displays the astronomy picture of the day, a description and a title of the picture as well as having visualizations of previous pictures"
     />
-    <meta name="keywords" content="Weather, Mars, InSight, blogs" />
+    <meta name="keywords" content="Space, picture, Astronomy, blogs" />
     <meta name="author" content="Sihle Mazibuko" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Mars Weather Service" />
+    <meta property="og:title" content="Astronomy Picture of The Day" />
     <meta property="og:locale" content="en_ZA" />
-    <meta property="og:site_name" content="Mars Weather Service" />
+    <meta property="og:site_name" content="Astronomy Picture of The Day" />
     <meta
       property="og:description"
-      content="This website displays the weather on Mars as per the NASA InSight Mars lander as well as supplies information on the website's creation and its creative journey by the creator of the website Sihle Mazibuko"
+      content="This website displays the astronomy picture of the day, a description and a title of the picture as well as having visualizations of previous pictures"
     />
     <link rel="shortcut icon" href="./images/mars.png" />
 
-    <!-- <meta
+    <meta
       property="og:url"
-      content="https://sihle-mazibuko.github.io/Portfolio/"
-    /> -->
-    <title>Mars Weather</title>
+      content="https://sihle-mazibuko.github.io/Data-visualization/"
+    />
+    <title>Astronomy Picture of The Day</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -34,33 +34,45 @@
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     />
     <link rel="stylesheet" href="./CSS/homestyle.css" />
+    <link rel="stylesheet" href="./CSS/background.css" />
+    <link rel="stylesheet" href="./CSS/navbar.css" />
+    <script type="text/javascript" src="./JS/app.js"></script>
+    <script type="text/javascript" src="./JS/api.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
   </head>
   <body>
-    <header>
-      <a href="#" class="logo"
-        ><img src="./images/mars.png" alt="website logo"
-      /></a>
-      <nav class="bx bx-menu" id="menu-icon"></nav>
-
-      <nav>
-        <ul class="navlist">
-          <li><a href="#">Home</a></li>
-          <li id="blogs"><a href="#">Blogs</a></li>
-          <li id="designs"><a href="#designs">Designs</a></li>
-          <li id="data-visuals">
-            <a href="#data-visuals">Weather Visualisation</a>
-          </li>
-          <li id="data-art"><a href="#data-art">Weather Art</a></li>
-        </ul>
+    <header class="header">
+      <a href="#" class="logo">Logo</a>
+      <input type="checkbox" id="check" />
+      <label for="check" class="icons">
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <i class="bx bx-x" id="close-icon"></i>
+      </label>
+      <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Wireframes</a>
+        <a href="#">Style Guide</a>
+        <a href="#">Blogs</a>
+        <a href="#">Data Visualisations</a>
       </nav>
     </header>
+
     <main>
+      <div class="wrapper">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+      </div>
+
       <section class="home">
         <p>I KNOW IM EMPTY</p>
       </section>
 
       <section class="designs">
-        <h2 class="heading">Wireframes</h2>
+        <h2 class="section-heading">Wireframes</h2>
 
         <div class="items">
           <div class="sub-box">
@@ -114,7 +126,7 @@
           </div>
         </div>
 
-        <h2 class="heading">Style guide</h2>
+        <h2 class="section-heading">Style guide</h2>
         <h3 class="style-title">Design goal</h3>
         <p class="style-text">
           This website aims to first provide accurate information that users can
@@ -122,7 +134,7 @@
         </p>
 
         <h3 class="style-title">Colour choices</h3>
-        <p class="style-text">
+        <p class="style-text p">
           The previously mentioned goal of giving this website a galactic feel
           is achieved through the colour choices used in the site. The website
           is predominantly black and white, mimicking how space looks like, a
@@ -193,13 +205,13 @@
         </div>
       </section>
 
-      <section class="weather-visuals">
-        <h2 class="heading">Weather visualizations</h2>
+      <section class="data-visuals">
+        <h2 class="section-heading">Weather visualizations</h2>
         <p>No content to display</p>
       </section>
 
-      <section class="weather-art">
-        <h2 class="heading">Weather art visualisation</h2>
+      <section class="data-art">
+        <h2 class="section-heading">Weather art visualisation</h2>
         <p>No content to display</p>
       </section>
     </main>
@@ -208,7 +220,5 @@
         <p>Made by Sihle Mazibuko</p>
       </div>
     </footer>
-    <script type="text/javascript" src="./JS/app.js"></script>
-    <script type="text/javascript" src="./JS/api.js"></script>
   </body>
 </html>
