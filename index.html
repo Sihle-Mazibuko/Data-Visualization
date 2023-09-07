@@ -34,6 +34,7 @@
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     />
     <link rel="stylesheet" href="./CSS/homestyle.css" />
+    <link rel="stylesheet" href="./CSS/normal.css" />
     <link rel="stylesheet" href="./CSS/background.css" />
     <link rel="stylesheet" href="./CSS/navbar.css" />
     <script type="text/javascript" src="./JS/app.js"></script>
@@ -52,11 +53,11 @@
         <i class="bx bx-x" id="close-icon"></i>
       </label>
       <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Wireframes</a>
-        <a href="#">Style Guide</a>
-        <a href="#">Blogs</a>
-        <a href="#">Data Visualisations</a>
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="#designs">Wireframes</a>
+        <a href="#style-guide">Style Guide</a>
+        <a href="/html/blogs.html" class="nav-link">Blogs</a>
+        <a href="/html/data.html" class="nav-link">Data Visualisations</a>
       </nav>
     </header>
 
@@ -70,12 +71,12 @@
       <section class="home">
         <h1 id="image-title"></h1>
         <p id="img-date"></p>
-        <img id="image" alt="Todays Astronomy Picture of the Day" />
-
+        <!-- <img id="image" alt="Todays Astronomy Picture of the Day" /> -->
+        <div id="image"></div>
         <p id="img-description"></p>
       </section>
 
-      <section class="designs">
+      <section class="designs" id="designs">
         <h2 class="section-heading">Wireframes</h2>
 
         <div class="items">
@@ -130,7 +131,7 @@
           </div>
         </div>
 
-        <h2 class="section-heading">Style guide</h2>
+        <h2 class="section-heading" id="style-guide">Style guide</h2>
         <h3 class="style-title">Design goal</h3>
         <p class="style-text">
           This website aims to first provide accurate information that users can

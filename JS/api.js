@@ -11,7 +11,9 @@ async function RequestImage() {
 
 function useAPIData(data) {
   document.querySelector("#image-title").innerHTML = data.title;
-  document.querySelector("#image").innerHTML += `<img src="${data.url}"`;
+  document.querySelector(
+    "#image"
+  ).innerHTML += `<img src="${data.url}" alt="todays Apod`;
   document.querySelector("#img-description").innerHTML = data.explanation;
   document.querySelector("#img-date").innerHTML = data.date;
 }

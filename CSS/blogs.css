@@ -1,0 +1,11 @@
+.out {
+  text-align: center;
+  padding: 20px;
+}
+
+.out p {
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0.4;
+  color: rgb(168, 168, 168);
+}
