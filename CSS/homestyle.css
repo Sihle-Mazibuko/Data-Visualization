@@ -191,3 +191,61 @@ section {
 .home {
   color: white;
 }
+
+.section-description {
+  color: white;
+  font-size: 1.1rem;
+  padding: 1.2rem 0 1.2rem 0;
+}
+
+#book {
+  font-style: italic;
+}
+
+.page-links-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, auto));
+  grid-gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.page-links-content h3 {
+  text-align: center;
+}
+
+.row {
+  background: #aa2704;
+  box-shadow: 18px 0 87px 0 rgb(73, 73, 73);
+  border-radius: 12px;
+  padding: 45px 45px 45px 45px;
+  transition: 0.3s;
+}
+
+.link-img {
+  height: 65px;
+  width: 65px;
+}
+
+.chart {
+  width: 90px;
+}
+
+.row h3 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: -50px;
+  text-transform: uppercase;
+}
+
+.row p {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 80px;
+  line-height: 22px;
+}
+
+.row:hover {
+  transform: scale(1.1);
+}

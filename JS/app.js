@@ -6,3 +6,12 @@ navLinks.forEach((navLink) => {
     navLink.classList.add("active");
   }
 });
+
+const blogLink = document.querySelector(".blog-link");
+blogLink.addEventListener("click", () => BlogClick());
+
+function BlogClick() {
+  window.location.replace(
+    "https://sihle-mazibuko.github.io/Data-Visualization/html/blogs.html"
+  );
+}
