@@ -7,11 +7,15 @@ navLinks.forEach((navLink) => {
   }
 });
 
-const blogLink = document.querySelector(".blog-link");
-blogLink.addEventListener("click", () => BlogClick());
+const blogLinks = document.querySelectorAll("page-links-content");
+blogLinks.forEach((blogLink) => {
+  blogBox.addEventListener("click", () => BlogClick());
+});
 
 function BlogClick() {
   window.location.replace(
-    "https://sihle-mazibuko.github.io/Data-Visualization/html/blogs.html"
+    "https://sihle-mazibuko.github.io/Portfolio/essay.html"
   );
+
+  console.log(blogLinks);
 }
