@@ -41,17 +41,20 @@ header {
 
 .navlist {
   display: flex;
+  background: none;
 }
 
 .navlist li {
   position: relative;
+  background: none;
 }
 
 .navlist a {
   font-size: 1.3rem;
   font-weight: 600;
   padding: 10px 50px;
-  color: rgba(255, 255, 255, 0.314);
+  color: rgba(255, 255, 255, 0.563);
+  background: none;
 }
 
 .navlist a::after {
@@ -78,9 +81,16 @@ header {
 }
 
 header.sticky {
-  background: #262829;
+  background: #181818;
   padding: 13px 18%;
   box-shadow: 0px 0px 10px rgb(0 0 0/ 10%);
+  .earth {
+    margin-top: 1.2rem;
+  }
+  .navlist,
+  .navlist li {
+    background: none;
+  }
 }
 
 @media (max-width: 1425px) {
