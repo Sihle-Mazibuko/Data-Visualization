@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="This page displays the websites creative journey by the creator of the website Sihle Mazibuko as well as providing insight regarding readings used when creating the sight in the form of blog posts"
+      content="This page display various data visualisations using data collected from NASAs APOD API and aims to provide the user with various useful information."
     />
-    <meta name="keywords" content="Space, picture, Astronomy, blogs" />
+    <meta
+      name="keywords"
+      content="Data, picture, Astronomy, visualisations, September"
+    />
     <meta name="author" content="Sihle Mazibuko" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="APOD Blog Posts" />
+    <meta property="og:title" content="APOD Data" />
     <meta property="og:locale" content="en_ZA" />
-    <meta property="og:site_name" content="APOD Blog Posts" />
+    <meta property="og:site_name" content="APOD Data" />
     <meta
       property="og:description"
-      content="This page displays the websites creative journey by the creator of the website Sihle Mazibuko as well as providing insight regarding readings used when creating the sight in the form of blog posts"
+      content="This page display various data visualisations using data collected from NASAs APOD API and aims to provide the user with various useful information."
     />
     <link rel="shortcut icon" href="/images/mars.png" />
 
     <meta
       property="og:url"
-      content="https://sihle-mazibuko.github.io/Portfolio/"
+      content="https://sihle-mazibuko.github.io/Data-Visualization/html/data.html"
     />
     <title>APOD | Data</title>
     <link
@@ -33,10 +36,59 @@
       rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     />
-    <link rel="stylesheet" href="/CSS/navbar.css" />
-    <link rel="stylesheet" href="/CSS/background.css" />
-    <link rel="stylesheet" href="/CSS/normal.css" />
-    <script type="text/javascript" src="./JS/app.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="../CSS/navbar.css" />
+    <link rel="stylesheet" href="../CSS/background.css" />
+    <link rel="stylesheet" href="../CSS/normal.css" />
+    <link rel="stylesheet" href="../CSS/data.css" />
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <a href="#" class="earth"> <span>....</span></a>
+      <i class="bx bx-menu" id="menu-icon"></i>
+
+      <ul class="navlist">
+        <li>
+          <a href="https://sihle-mazibuko.github.io/Data-visualization/"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://sihle-mazibuko.github.io/Data-Visualization/html/blogs.html"
+            >Blogs</a
+          >
+        </li>
+        <li><a href="#">Data Visualisations</a></li>
+      </ul>
+    </header>
+    <main>
+      <div class="background">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+      </div>
+      <section>
+        <h1>APOD Data</h1>
+        <h2>(September 2023)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Image URL</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <div class="out">
+        <p>Made by Sihle Mazibuko</p>
+      </div>
+    </footer>
+    <script type="text/javascript" src="../JS/app.js"></script>
+    <script type="text/javascript" src="../JS/data.js"></script>
+  </body>
 </html>

@@ -1,21 +1,18 @@
-const navLinks = document.querySelectorAll(".nav-link");
-const windowPathname = window.location.pathname;
+const header = document.querySelector("header");
 
-navLinks.forEach((navLink) => {
-  if (navLink.href.includes(windowPathname)) {
-    navLink.classList.add("active");
-  }
+window.addEventListener("scroll", function () {
+  header.classList.toggle("sticky", window.scrollY > 0);
 });
 
-const blogLinks = document.querySelectorAll("page-links-content");
-blogLinks.forEach((blogLink) => {
-  blogBox.addEventListener("click", () => BlogClick());
-});
+let menu = document.querySelector("#menu-icon");
+let navList = document.querySelector(".navlist");
 
-function BlogClick() {
-  window.location.replace(
-    "https://sihle-mazibuko.github.io/Portfolio/essay.html"
-  );
+menu.onclick = () => {
+  menu.classList.toggle("bx-x");
+  navList.classList.toggle("active");
+};
 
-  console.log(blogLinks);
-}
+window.onscroll = () => {
+  menu.classList.remove("bx-x");
+  navList.classList.remove("active");
+};
