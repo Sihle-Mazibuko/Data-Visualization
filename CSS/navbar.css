@@ -53,10 +53,12 @@ header {
   font-size: 1.3rem;
   font-weight: 600;
   padding: 10px 50px;
-  color: rgba(255, 255, 255, 0.563);
+  color: rgba(255, 255, 255, 0.382);
   background: none;
 }
-
+.navlist a:hover {
+  color: white;
+}
 .navlist a::after {
   content: "";
   position: absolute;
@@ -70,7 +72,6 @@ header {
 
 .navlist a:hover::after {
   width: 100%;
-  color: white;
 }
 
 #menu-icon {

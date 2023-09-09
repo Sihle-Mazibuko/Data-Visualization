@@ -193,7 +193,7 @@ section {
 
 .page-links-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, auto));
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   grid-gap: 2rem;
   align-items: center;
   margin-top: 2rem;
@@ -239,4 +239,11 @@ section {
   will-change: transform;
   transform: perspective(1000px) rotateX(1deg) rotateY(1deg)
     scale3d(1.05, 1.05, 1.05);
+}
+
+.row p,
+.row h3,
+.row q,
+.link-img {
+  background: none;
 }
