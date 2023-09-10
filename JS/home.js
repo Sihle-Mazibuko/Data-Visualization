@@ -1,3 +1,14 @@
+const blogLinks = document.querySelectorAll(".blog-link");
+blogLinks.forEach((blogLink) => {
+  blogLink.addEventListener("click", () => BlogClick());
+});
+
+function BlogClick() {
+  window.location.replace(
+    "https://sihle-mazibuko.github.io/Portfolio/blogpages.html"
+  );
+}
+
 const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
 
 async function RequestImage() {

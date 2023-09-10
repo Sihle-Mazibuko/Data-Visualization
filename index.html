@@ -55,13 +55,13 @@
         <li><a href="#designs">Wireframes</a></li>
         <li><a href="#style-guide">Style Guide</a></li>
 
-        <li>
+        <li class="blog-link">
           <a
             href="https://sihle-mazibuko.github.io/Data-Visualization/html/blogs.html"
             >Blogs</a
           >
         </li>
-        <li>
+        <li class="data-link">
           <a
             href="https://sihle-mazibuko.github.io/Data-Visualization/html/data.html"
             >Data Visualisations</a
@@ -71,46 +71,46 @@
     </header>
 
     <main>
-      <div class="background">
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-      </div>
+      <ol class="background">
+        <li id="stars"></li>
+        <li id="stars2"></li>
+        <li id="stars3"></li>
+      </ol>
 
       <section class="home">
         <h1 id="image-title"></h1>
         <p id="img-date"></p>
         <img id="apod-img" alt="Todays Astronomy Picture of the Day" />
-        <p id="img-description"></p>
+        <figcaption id="img-description"></figcaption>
       </section>
 
       <section class="designs" id="designs">
         <h2 class="section-heading">Wireframes</h2>
 
-        <div class="items">
+        <article class="items">
           <div class="sub-box">
-            <div class="sub-img">
+            <figure class="sub-img">
               <img src="./images/HOME WF.jpg" alt="Homepage wireframe" />
-            </div>
+            </figure>
             <h3>Homepage wireframe</h3>
             <p>This wireframe is of the home page section of this website.</p>
           </div>
 
           <div class="sub-box">
-            <div class="sub-img">
+            <figure class="sub-img">
               <img src="./images/BLOG WF.jpg" alt="Blogs section wireframe" />
-            </div>
+            </figure>
             <h3>Blogs wireframe</h3>
             <p>This wireframe is of the blogs section of this website.</p>
           </div>
 
           <div class="sub-box">
-            <div class="sub-img">
+            <figure class="sub-img">
               <img
                 src="./images/STYLE GUIDE WF.jpg"
                 alt="Style guide wireframe"
               />
-            </div>
+            </figure>
             <h3>Style guide wireframe</h3>
             <p>
               This wireframe is that of the style guide section of this website.
@@ -118,9 +118,9 @@
           </div>
 
           <div class="sub-box">
-            <div class="sub-img">
+            <figure class="sub-img">
               <img src="./images/WIREFRAMES WF.jpg" alt="Homepage wireframe" />
-            </div>
+            </figure>
             <h3>Wireframe section wireframe</h3>
             <p>
               This wireframe shows how all the wireframes of each section will
@@ -129,17 +129,19 @@
           </div>
 
           <div class="sub-box">
-            <div class="sub-img">
+            <figure class="sub-img">
               <img src="./images/DATA WF.jpg" alt="Homepage wireframe" />
-            </div>
+            </figure>
             <h3>Data visualisations wireframe</h3>
             <p>
               This wireframe is that of the home page section of this website.
             </p>
           </div>
-        </div>
+        </article>
+      </section>
 
-        <h2 class="section-heading" id="style-guide">Style guide</h2>
+      <section id="style-guide">
+        <h2 class="section-heading">Style guide</h2>
         <h3 class="style-title">Design goal</h3>
         <p class="style-text">
           This website aims to first provide accurate information that users can
@@ -226,7 +228,7 @@
         </p>
 
         <ul class="page-links-content">
-          <li class="row" id="blog-link">
+          <li class="row blog-link">
             <img
               src="./images/notepad.png"
               alt="An image of a notepad"
@@ -240,7 +242,7 @@
             </p>
           </li>
 
-          <li class="row" id="data-link">
+          <li class="row data-link">
             <img
               src="./images/chart.png"
               alt="An image of a notepad"
@@ -256,9 +258,7 @@
       </section>
     </main>
     <footer>
-      <div class="out">
-        <p>Made by Sihle Mazibuko</p>
-      </div>
+      <p class="out">Made by Sihle Mazibuko</p>
     </footer>
 
     <script type="text/javascript" src="./JS/app.js"></script>
