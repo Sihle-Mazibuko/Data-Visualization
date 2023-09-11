@@ -15,6 +15,7 @@ h1 {
   font-size: 2.5rem;
   text-transform: capitalize;
   margin-bottom: 1.5rem;
+  margin-left: 3rem;
 }
 
 section {
@@ -32,4 +33,58 @@ section {
   line-height: 1.5rem;
   margin: 1rem 0;
   text-align: justify;
+}
+
+.ref-hold {
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.ref-hold h3 {
+  margin-bottom: 10px;
+}
+
+.ref-hold p {
+  line-height: 16px;
+  letter-spacing: 2px;
+  margin: 5px;
+}
+
+.blog-menu {
+  display: flex;
+  justify-content: center;
+}
+.blog-menu li {
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
+  color: #656565;
+  position: relative;
+}
+.blog-menu li::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.blog-menu li.active,
+.blog-menu li:hover {
+  color: white;
+  border: 2px solid white;
+}
+
+.blog-menu li.active::before,
+.blog-menu li:hover::before {
+  transform: scaleX(1);
+}
+
+.blog {
+  display: none;
 }

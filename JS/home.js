@@ -20,3 +20,39 @@ function useAPIData(data) {
 }
 
 RequestImage();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const blogLink = document.getElementById("blog-link");
+  const dataLink = document.getElementById("data-link");
+
+  blogLink.addEventListener("click", function () {
+    window.location.href =
+      "https://sihle-mazibuko.github.io/Data-Visualization/html/blogs.html";
+  });
+
+  dataLink.addEventListener("click", function () {
+    window.location.href =
+      "https://sihle-mazibuko.github.io/Data-Visualization/html/data.html";
+  });
+});
+
+// Get all the color list items
+const colorItems = document.querySelectorAll(".colour-item");
+
+function handleMouseOver(event) {
+  const listItem = event.target;
+  const listItemClass = listItem.classList[0];
+
+  const tooltip = document.getElementById("tool-tip");
+  tooltip.textContent = listItemClass;
+}
+
+function handleMouseOut() {
+  const tooltip = document.getElementById("tool-tip");
+  tooltip.textContent = "";
+}
+
+colorItems.forEach((item) => {
+  item.addEventListener("mouseover", handleMouseOver);
+  item.addEventListener("mouseout", handleMouseOut);
+});

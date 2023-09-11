@@ -56,6 +56,9 @@
           <a href="#">Blogs</a>
         </li>
         <li>
+          <a href="#references">References</a>
+        </li>
+        <li>
           <a
             href="https://sihle-mazibuko.github.io/Data-Visualization/html/data.html"
             >Data Visualisations</a
@@ -72,11 +75,15 @@
       </ol>
       <section>
         <h1>Blogs</h1>
-        <p>wow</p>
+
+        <ul class="blog-menu">
+          <li data-article="article1">Overview of Data Visualisation</li>
+          <li data-article="article2">Proposed UI and UX</li>
+        </ul>
       </section>
 
       <section>
-        <article class="blog">
+        <article class="blog" id="article1">
           <h2 class="blog-title">Overview of Data Visualization</h2>
           <p class="blog-p">
             This reading on data visualizations provides a multitude of insights
@@ -155,7 +162,54 @@
             legible and comprehensible on the website, which can be useful for
             my design choices.
           </p>
-          <div class="ref-hold"></div>
+          <div class="ref-hold" id="references">
+            <h3>References:</h3>
+            <p>
+              Kalluri, K., 2020. Importance, Purpose, and Benefit of Data
+              Visualization Tools! URL
+              https://splashbi.com/importance-purpose-benefit-of-data-visualization-tools/.
+            </p>
+            <p>
+              Li, Q., 2020. Overview of Data Visualization, in: Embodying Data.
+              Springer Singapore, Singapore, pp. 17–47.
+              https://doi.org/10.1007/978-981-15-5069-0_2
+            </p>
+            <p>
+              The Weather Channel. (2019). National and Local Weather Radar,
+              Daily Forecast, Hurricane and information from The Weather Channel
+              and weather.com. https://weather.com.
+            </p>
+          </div>
+        </article>
+
+        <article class="blog" id="article2">
+          <h2 class="blog-title">Critical reflection of proposed UI and UX</h2>
+          <p class="blog-p"></p>
+          <p class="blog-p"></p>
+          <p class="blog-p"></p>
+          <p class="blog-p"></p>
+          <div class="ref-hold" id="references">
+            <h3>References</h3>
+            <p>
+              Bole, U. (2016). Least likely colors to cause computer eye strain:
+              Find yours. [online] GLARminY. Available at:
+              https://glarminy.com/2016/03/29/anti-computer-eye-strain-colors/.
+            </p>
+            <p>
+              Knaflic, C.N., 2015. Storytelling with data: A data visualization
+              guide for business professionals. John Wiley & Sons.
+            </p>
+            <p>
+              Osman, M. (2023). The Ultimate List of Web-Safe HTML and CSS
+              Fonts. [online] blog.hubspot.com. Available at:
+              https://blog.hubspot.com/website/web-safe-html-css-fonts.
+            </p>
+            <p>
+              Rebecca (2021). Aesthetically Pleasing: Meaning and Examples.
+              [online] Minimalism Made Simple. Available at:
+              https://www.minimalismmadesimple.com/home/aesthetically-pleasing/#:~:text=A%20smooth%2C%20calm%2C%20and%20open
+            </p>
+          </div>
         </article>
       </section>
     </main>
@@ -163,5 +217,6 @@
       <p class="out">Made by Sihle Mazibuko</p>
     </footer>
     <script type="text/javascript" src="../JS/app.js"></script>
+    <script type="text/javascript" src="../JS/blogs.js"></script>
   </body>
 </html>

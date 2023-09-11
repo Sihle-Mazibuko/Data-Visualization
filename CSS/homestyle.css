@@ -216,7 +216,7 @@ section {
 .page-links-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
-  grid-gap: 2rem;
+  grid-gap: 8rem;
   align-items: center;
   margin-top: 2rem;
   cursor: pointer;
