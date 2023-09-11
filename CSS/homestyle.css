@@ -10,6 +10,14 @@ section {
   text-align: center;
 }
 
+.new-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  grid-gap: 32px;
+  align-items: center;
+  text-align: center;
+}
+
 .sub-box {
   padding: 45px 45px 45px 45px;
   transition: ease 0.3s;
