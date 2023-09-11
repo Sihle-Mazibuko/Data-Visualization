@@ -9,3 +9,27 @@
   opacity: 0.4;
   color: rgb(168, 168, 168);
 }
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  margin-bottom: 1.5rem;
+}
+
+section {
+  padding: 80px 10%;
+}
+
+.blog-title {
+  text-align: center;
+  margin: 1.3rem;
+  font-size: 1.9rem;
+}
+
+.blog-p {
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  margin: 1rem 0;
+  text-align: justify;
+}

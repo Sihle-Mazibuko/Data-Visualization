@@ -17,7 +17,7 @@ td {
 h1,
 h2 {
   text-align: center;
-  margin: 20px 0 0 10px;
+  margin: 15px;
 }
 
 section {
@@ -29,16 +29,19 @@ th {
   background-color: blueviolet;
 }
 
-tr:nth-of-type(3n) {
-  background-color: no;
-}
-
 .today-indicator {
-  color: rgb(0, 0, 0);
+  color: rgb(199, 199, 199);
 }
 
 table a {
   background: none;
+}
+
+svg {
+  display: block;
+  margin: 30px auto 0;
+  background-color: rgb(55, 55, 55);
+  border: 2px solid darkgrey;
 }
 
 @media (max-width: 500px) {
@@ -57,4 +60,38 @@ table a {
     padding: 0.2em;
     font-size: 0.8rem;
   }
+}
+
+.x-axis text {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+.y-axis text {
+  font-size: 0.9rem;
+}
+
+.x-axis-label {
+  padding: 20px;
+}
+
+.i {
+  padding: 20px;
+  text-align: justify;
+  display: block;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.table-i {
+  line-height: 18px;
+}
+
+#headings {
+  margin-bottom: -100px;
+}
+
+.underline {
+  text-decoration: underline;
 }
