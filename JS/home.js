@@ -36,23 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Get all the color list items
-const colorItems = document.querySelectorAll(".colour-item");
+document.addEventListener("DOMContentLoaded", function () {
+  const colours = document.querySelectorAll(".colour-item");
 
-function handleMouseOver(event) {
-  const listItem = event.target;
-  const listItemClass = listItem.classList[0];
-
-  const tooltip = document.getElementById("tool-tip");
-  tooltip.textContent = listItemClass;
-}
-
-function handleMouseOut() {
-  const tooltip = document.getElementById("tool-tip");
-  tooltip.textContent = "";
-}
-
-colorItems.forEach((item) => {
-  item.addEventListener("mouseover", handleMouseOver);
-  item.addEventListener("mouseout", handleMouseOut);
+  colours.forEach(function (colour) {
+    const colourID = colour.id;
+    tippy(colour, {
+      content: `Colour: ${colourID}`,
+    });
+  });
 });
