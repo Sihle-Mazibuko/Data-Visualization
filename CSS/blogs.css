@@ -54,37 +54,44 @@ section {
   display: flex;
   justify-content: center;
 }
-.blog-menu li {
+
+.btn {
   cursor: pointer;
-  padding: 10px;
-  margin: 5px;
-  color: #656565;
+  margin: 10px 30px;
+  padding: 15px;
+  color: #aa2704;
   position: relative;
+  background: none;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-radius 0.3s, color 0.3s,
+    border-color 0.3s;
 }
-.blog-menu li::before {
+
+.btn.active,
+.btn:hover {
+  color: white;
+  border-color: whitesmoke;
+  border-radius: 0;
+}
+
+.btn::before {
   content: "";
   position: absolute;
-  bottom: -3px;
+  top: 0;
   left: 0;
   width: 0;
-  height: 2px;
-  background-color: #ffffff;
-  transition: width 0.3s ease;
-  transform: scaleX(0);
-  transform-origin: left;
+  height: 0;
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
 }
 
-.blog-menu li.active,
-.blog-menu li:hover {
-  color: white;
-  border: 2px solid white;
+.btn.active::before,
+.btn:hover::before {
+  width: 100%;
+  height: 100%;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
-
-.blog-menu li.active::before,
-.blog-menu li:hover::before {
-  transform: scaleX(1);
-}
-
 .blog {
   display: none;
+  width: 80%;
 }

@@ -54,7 +54,7 @@
         <li>
           <a href="#">Home</a>
         </li>
-        <li><a href="#designs">Wireframes</a></li>
+        <li><a href="#old-designs">Wireframes</a></li>
         <li><a href="#style-guide">Style Guide</a></li>
 
         <li class="blog-link">
@@ -79,36 +79,51 @@
         <li id="stars3"></li>
       </ol>
 
-      <section class="home">
+      <aside class="sticky-nav-box">
+        <h2>Home Page</h2>
+        <a class="box-nav-link" href="#home-page">APOD</a>
+        <a class="box-nav-link" href="#old-designs">Wireframes</a>
+        <a class="box-nav-link" href="#style-guide">Style Guide</a>
+        <a class="box-nav-link" href="#page-links">Blogs and Data</a>
+      </aside>
+
+      <section class="home" id="home-page">
         <h1 id="image-title"></h1>
         <p id="img-date"></p>
         <img id="apod-img" alt="Todays Astronomy Picture of the Day" />
         <figcaption id="img-description"></figcaption>
+        <p class="home-description">
+          This website is made exclusively for those interested in viewing
+          images that capture the beauty in our universe. Alongside viewing
+          these beautiful images, data gathered from NASA's Astronomy Picture of
+          the Day regarding said images is afforded to the user allowing them
+          different kinds of knowledge depending on the type of data presented.
+        </p>
       </section>
 
-      <section class="designs old-designs" id="designs">
+      <section class="designs old-designs" id="old-designs">
         <h2 class="section-heading">Initial Wireframes:</h2>
         <p class="section-description">
           These are the wireframes from the InSight API
         </p>
         <article class="items">
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img src="./images/HOME WF.jpg" alt="Homepage wireframe" />
             </figure>
             <h3>Homepage wireframe</h3>
             <p>This wireframe is of the home page section of this website.</p>
-          </div>
+          </figure>
 
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img src="./images/BLOG WF.jpg" alt="Blogs section wireframe" />
             </figure>
             <h3>Blogs wireframe</h3>
             <p>This wireframe is of the blogs section of this website.</p>
-          </div>
+          </figure>
 
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img
                 src="./images/STYLE GUIDE WF.jpg"
@@ -119,9 +134,9 @@
             <p>
               This wireframe is that of the style guide section of this website.
             </p>
-          </div>
+          </figure>
 
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img src="./images/WIREFRAMES WF.jpg" alt="Wireframe wireframe" />
             </figure>
@@ -130,9 +145,9 @@
               This wireframe shows how all the wireframes of each section will
               be displayed.
             </p>
-          </div>
+          </figure>
 
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img
                 src="./images/DATA WF.jpg"
@@ -141,11 +156,11 @@
             </figure>
             <h3>Data visualisations wireframe</h3>
             <p>This wireframe is that of the data visualisations section.</p>
-          </div>
+          </figure>
         </article>
       </section>
 
-      <section class="designs new-designs">
+      <section class="designs new-designs" id="new-designs">
         <h2 class="section-heading">Current wireframes</h2>
         <p class="section-description">
           These are the wireframes for the current APOD website. (Only changes
@@ -153,7 +168,7 @@
         </p>
 
         <article class="new-items">
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img
                 src="./images/BLOG WIREFRAME.jpg"
@@ -162,9 +177,9 @@
             </figure>
             <h3>New blog Page</h3>
             <p>This wireframe is that of the new blog page.</p>
-          </div>
+          </figure>
 
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img
                 src="./images/DV wireframe.jpg"
@@ -173,9 +188,9 @@
             </figure>
             <h3>New data Page</h3>
             <p>This wireframe is that of the APOD data visualisations.</p>
-          </div>
+          </figure>
 
-          <div class="sub-box">
+          <figure class="sub-box">
             <figure class="sub-img">
               <img
                 src="./images/ADDITIONS.jpg
@@ -188,7 +203,7 @@
               This wireframe is that of the changes to already exisiting
               elements or completely new elements
             </p>
-          </div>
+          </figure>
         </article>
       </section>
 
@@ -213,7 +228,7 @@
           variety in the choice of colours.
         </p>
         <p>These are all the colours used on the website:</p>
-        <div class="colour-swatch">
+        <figure class="colour-swatch">
           <ul>
             <li class="colour-item" id="Rusty-red"></li>
             <li class="colour-item" id="Black"></li>
@@ -228,7 +243,7 @@
             <li class="colour-item" id="Darkslate-blue"></li>
             <li class="colour-item" id="Blueviolet"></li>
           </ul>
-        </div>
+        </figure>
 
         <h3 class="style-title">Font choice</h3>
         <p class="style-text">
@@ -274,7 +289,7 @@
           which also gives them a distant look.
         </p>
 
-        <div class="ref-hold">
+        <figure class="ref-hold">
           <h4 class="ref">Reference:</h4>
           <p class="reference">
             Osman, M. (2023).
@@ -288,10 +303,10 @@
               >https://blog.hubspot.com/website/web-safe-html-css-fonts</a
             >.
           </p>
-        </div>
+        </figure>
       </section>
 
-      <section class="page-links">
+      <section class="page-links" id="page-links">
         <h2 class="section-heading">More info on APOD</h2>
         <p class="section-description">
           Read up on some blogs I have made regarding this website or view
@@ -307,9 +322,8 @@
             />
             <h3>Blogs</h3>
             <p>
-              Read a blog that is focused on Qi Li’s reading
-              <q id="book">Overview of Data Visualisation (2020)</q> or read up
-              on the proposed UI and UX elements found on the site.
+              Read up on blogs focused on various readings and aspects found on
+              the website
             </p>
           </li>
 

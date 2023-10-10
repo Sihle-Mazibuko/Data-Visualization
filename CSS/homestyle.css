@@ -223,7 +223,7 @@ section {
 
 .page-links-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 8rem;
   align-items: center;
   margin-top: 2rem;
@@ -240,6 +240,8 @@ section {
   border-radius: 12px;
   padding: 45px 45px 45px 45px;
   transition: 0.3s;
+  width: 500px;
+  height: 200px;
 }
 
 .link-img {
@@ -261,7 +263,7 @@ section {
 .row p {
   font-size: 15px;
   font-weight: 400;
-  margin-top: 80px;
+  margin: 80px 0 80px 0;
   line-height: 22px;
 }
 
@@ -310,5 +312,38 @@ section {
   margin-left: 50px;
   line-height: 20px;
   letter-spacing: 1px;
-  font-size: 1rem;
+  font-size: 0.8rem;
+}
+
+.home-description {
+  margin: 60px 0 -90px 0;
+  font-size: 20px;
+  text-align: left;
+}
+
+.sticky-nav-box {
+  position: sticky;
+  top: 200px;
+  width: 200px;
+  color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.box-nav-link {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.box-nav-link:hover {
+  background-color: #555;
+}
+
+.sticky-nav-box h2 {
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
