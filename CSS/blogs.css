@@ -46,7 +46,7 @@ section {
 
 .ref-hold p {
   line-height: 16px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin: 5px;
 }
 
@@ -91,7 +91,11 @@ section {
   border-top-color: transparent;
   border-left-color: transparent;
 }
+
 .blog {
   display: none;
-  width: 80%;
+}
+
+.paragraph-title {
+  margin: 20px;
 }
