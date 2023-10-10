@@ -52,3 +52,48 @@ svg {
 #headings {
   margin-bottom: -100px;
 }
+
+#slideshow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.slideshow-container {
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slideshow-container img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.slideshow-text {
+  text-align: center;
+  padding: 10px;
+  background: #000;
+}
+
+#apod-title {
+  font-size: 20px;
+  color: white;
+}
+
+#apod-date {
+  font-size: 14px;
+  color: white;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

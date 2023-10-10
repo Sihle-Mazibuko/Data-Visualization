@@ -1,61 +1,105 @@
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+let currentDay = 1;
 
-const currentMonth = new Date().getMonth();
-const currentMonthName = monthNames[currentMonth];
-
-const ignore = ["a", "an", "the", "and", "of", "in"];
-
-async function fetchAPODs() {
+async function updateSlide() {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-  const titles = [];
+  const slideshowContainer = document.getElementById("slideshow-container");
+  const apodImage = document.getElementById("apod-image");
+  const apodTitle = document.getElementById("apod-title");
+  const apodDate = document.getElementById("apod-date");
 
-  for (let day = 1; day <= 30; day++) {
-    const date = `2023-${currentMonth + 1}-${day}`;
+  if (currentDay <= 31) {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    const date = `${currentYear}-${currentMonth
+      .toString()
+      .padStart(2, "0")}-${currentDay.toString().padStart(2, "0")}`;
     const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
 
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
+
       if (data.date && data.title && data.url) {
-        const { title, copyright } = data;
-        titles.push(title);
+        apodImage.src = data.url;
+        apodTitle.textContent = data.title;
+        apodDate.textContent = data.date;
+        currentDay++;
       } else {
-        console.warn(`Skipping day ${day} - Incomplete data`);
-        continue;
+        currentDay = 1;
       }
     } catch (error) {
       console.error(`Error fetching data for ${date}: ${error}`);
-      continue;
+    }
+  } else {
+    currentDay = 1;
+  }
+
+  setTimeout(updateSlide, 3000);
+}
+
+async function fetchAPODs() {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
+  const titles = [];
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+  const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+
+  const daysInMonth = new Date(previousYear, previousMonth, 0).getDate();
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = `${previousYear}-${previousMonth
+      .toString()
+      .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (data.date && data.title && data.url) {
+        titles.push(data.title);
+      }
+    } catch (error) {
+      console.error(`Error fetching data for ${date}: ${error}`);
     }
   }
 
-  const topWords = calculateTopWords(titles);
-
-  createGraph(topWords);
-  createCalendar(currentMonth, currentMonthName);
-
-  const topWords2023 = calculateTopWords2023(titles);
-  createLineGraph(topWords2023);
+  const topWords = getTopWords(titles);
+  drawBarGraph(topWords);
 }
 
-function createGraph(topWords) {
-  const margin = { top: 80, right: 80, bottom: 100, left: 100 };
+function getTopWords(titles) {
+  const titlesWords = titles
+    .join(" ")
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "")
+    .toLowerCase();
+  const words = titlesWords.split(/\s+/);
+  const ignore = ["a", "an", "the", "and", "of"];
+  const wordCount = {};
+
+  words.forEach((word) => {
+    if (!ignore.includes(word)) {
+      wordCount[word] = (wordCount[word] || 0) + 1;
+    }
+  });
+
+  const wordCountArray = Object.entries(wordCount).map(([word, count]) => ({
+    word,
+    count,
+  }));
+  wordCountArray.sort((a, b) => b.count - a.count);
+
+  return wordCountArray.slice(0, 5);
+}
+
+function drawBarGraph(topWords) {
+  const margin = { top: 60, right: 60, bottom: 80, left: 80 };
   const width = 1100 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
-
   const svg = d3
     .select("#bar-graph")
     .append("svg")
@@ -93,6 +137,18 @@ function createGraph(topWords) {
   svg.append("g").attr("class", "y-axis").call(d3.axisLeft(yScale).ticks(10));
 
   svg
+    .selectAll(".bar-label")
+    .data(topWords)
+    .enter()
+    .append("text")
+    .attr("class", "bar-label")
+    .attr("x", (d) => xScale(d.word) + xScale.bandwidth() / 2)
+    .attr("y", (d) => yScale(d.count) - 10)
+    .text((d) => d.count)
+    .style("text-anchor", "middle")
+    .style("fill", "white");
+
+  svg
     .append("text")
     .attr("x", width / 2)
     .attr("y", -margin.top / 2)
@@ -100,12 +156,12 @@ function createGraph(topWords) {
     .style("font-size", "20px")
     .style("fill", "white")
     .classed("underline", true)
-    .text(`Top 5 Most Common Words for the ${currentMonthName} 2023 APOD`);
+    .text("Top 5 Most Common Words in the September 2023 APOD");
 
   svg
     .append("text")
     .attr("x", width / 2)
-    .attr("y", height + margin.bottom - 30)
+    .attr("y", height + margin.bottom - 20)
     .attr("text-anchor", "middle")
     .style("font-size", "14px")
     .style("fill", "white")
@@ -114,7 +170,7 @@ function createGraph(topWords) {
   svg
     .append("text")
     .attr("x", -height / 2)
-    .attr("y", -margin.left + 20)
+    .attr("y", -margin.left + 30)
     .attr("text-anchor", "middle")
     .attr("transform", "rotate(-90)")
     .style("font-size", "14px")
@@ -122,262 +178,6 @@ function createGraph(topWords) {
     .text("Frequency");
 }
 
-function calculateTopWords(titles) {
-  const wordCount = {};
-
-  titles.forEach((title) => {
-    const words = title
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "")
-      .toLowerCase()
-      .split(/\s+/);
-
-    words.forEach((word) => {
-      if (!ignore.includes(word)) {
-        if (wordCount[word]) {
-          wordCount[word]++;
-        } else {
-          wordCount[word] = 1;
-        }
-      }
-    });
-  });
-
-  const wordCountArray = Object.entries(wordCount).map(([word, count]) => ({
-    word,
-    count,
-  }));
-
-  wordCountArray.sort((a, b) => b.count - a.count);
-
-  const topWords = wordCountArray.slice(0, 5);
-
-  return topWords;
-}
-
-function createCalendar(currentMonth, currentMonthName) {
-  const margin = { top: 80, right: 80, bottom: 100, left: 100 };
-  const width = 1100 - margin.left - margin.right;
-  const height = 600 - margin.top - margin.bottom;
-
-  const calendarContainer = d3
-    .select("#calendar")
-    .append("div")
-    .attr("class", "calendar-container")
-    .style("background-color", "white")
-    .style("border-radius", "10px")
-    .style("overflow", "hidden");
-
-  const calendarHeader = calendarContainer
-    .append("h2")
-    .text(`APODs for ${currentMonthName} 2023`)
-    .style("color", "white")
-    .style("margin", "0")
-    .style("padding", "20px");
-
-  const daysInMonth = new Date(
-    new Date().getFullYear(),
-    currentMonth + 1,
-    0
-  ).getDate();
-
-  const calendarTable = calendarContainer
-    .append("table")
-    .style("width", width + "px")
-    .style("height", height + "px")
-    .style("border-collapse", "collapse");
-
-  const calendarBody = calendarTable.append("tbody");
-
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const headerRow = calendarBody.append("tr");
-
-  daysOfWeek.forEach((day) => {
-    headerRow
-      .append("th")
-      .text(day)
-      .style("background-color", "white")
-      .style("color", "black")
-      .style("padding", "8px")
-      .style("border", "1px solid black");
-  });
-
-  let dayCounter = 1;
-
-  for (let i = 0; i < 6; i++) {
-    const row = calendarBody.append("tr");
-    for (let j = 0; j < 7; j++) {
-      if (dayCounter <= daysInMonth) {
-        if (
-          i === 0 &&
-          j < new Date(new Date().getFullYear(), currentMonth, 1).getDay()
-        ) {
-          row
-            .append("td")
-            .text("")
-            .style("padding", "8px")
-            .style("border", "1px solid black")
-            .style("background-color", "white");
-        } else {
-          row
-            .append("td")
-            .text(dayCounter)
-            .style("padding", "8px")
-            .style("border", "1px solid black")
-            .style("background-color", "white")
-            .style("color", "black")
-            .classed(
-              "current-day",
-              dayCounter === new Date().getDate() &&
-                currentMonth === new Date().getMonth()
-            );
-          dayCounter++;
-        }
-      } else {
-        row
-          .append("td")
-          .text("")
-          .style("padding", "8px")
-          .style("border", "1px solid black")
-          .style("background-color", "white");
-      }
-    }
-  }
-}
-
-function calculateTopWords2023(titles) {
-  const wordCount = {};
-
-  titles.forEach((title) => {
-    const words = title
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "")
-      .toLowerCase()
-      .split(/\s+/);
-
-    words.forEach((word) => {
-      if (!ignore.includes(word)) {
-        if (wordCount[word]) {
-          wordCount[word]++;
-        } else {
-          wordCount[word] = 1;
-        }
-      }
-    });
-  });
-
-  const wordCountArray = Object.entries(wordCount).map(([word, count]) => ({
-    word,
-    count,
-  }));
-
-  wordCountArray.sort((a, b) => b.count - a.count);
-
-  const topWords2023 = wordCountArray.slice(0, 10);
-
-  return topWords2023;
-}
-
-function createLineGraph(topWords2023) {
-  const width = 1000;
-  const height = 600;
-  const padding = 80;
-
-  const svg = d3
-    .select("#line-graph")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  const maxCount = d3.max(topWords2023, (d) => d.count);
-
-  const xScale = d3
-    .scalePoint()
-    .domain(topWords2023.map((d) => d.word))
-    .range([padding, width - padding])
-    .padding(0.5);
-
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, 8])
-    .range([height - padding, padding]);
-
-  const line = d3
-    .line()
-    .x((d) => xScale(d.word))
-    .y((d) => yScale(d.count))
-    .curve(d3.curveMonotoneX);
-
-  svg
-    .append("path")
-    .datum(topWords2023)
-    .attr("fill", "none")
-    .attr("stroke", "red")
-    .attr("stroke-width", 2)
-    .attr("d", line);
-
-  const xAxis = d3.axisBottom(xScale);
-  svg
-    .append("g")
-    .attr("class", "x-axis")
-    .attr("transform", `translate(0, ${height - padding})`)
-    .call(xAxis)
-    .selectAll("text")
-    .style("text-anchor", "middle")
-    .style("fill", "white")
-    .attr("dy", "1em");
-
-  const yAxis = d3.axisLeft(yScale).ticks(8);
-  svg
-    .append("g")
-    .attr("class", "y-axis")
-    .attr("transform", `translate(${padding}, 0)`)
-    .call(yAxis);
-
-  svg
-    .selectAll("circle")
-    .data(topWords2023)
-    .enter()
-    .append("circle")
-    .attr("cx", (d) => xScale(d.word))
-    .attr("cy", (d) => yScale(d.count))
-    .attr("r", 5)
-    .style("fill", "red");
-
-  svg
-    .selectAll("text")
-    .data(topWords2023)
-    .enter()
-    .append("text")
-    .attr("x", (d) => xScale(d.word))
-    .attr("y", (d) => yScale(d.count) - 15)
-    .text((d) => `${d.word} (${d.count})`)
-    .style("fill", "white")
-    .style("font-size", "12px")
-    .attr("text-anchor", "middle");
-
-  svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", height + 20)
-    .attr("text-anchor", "middle")
-    .style("font-size", "14px")
-    .style("fill", "white")
-    .text("Words");
-
-  svg
-    .append("text")
-    .attr("x", -height / 2)
-    .attr("y", padding - 40)
-    .attr("text-anchor", "middle")
-    .attr("transform", "rotate(-90)")
-    .style("font-size", "14px")
-    .style("fill", "white")
-    .text("Count");
-
-  const tooltip = d3
-    .select("body")
-    .append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
-}
-
 fetchAPODs();
+
+updateSlide();

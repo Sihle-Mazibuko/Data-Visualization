@@ -70,10 +70,10 @@
       </ol>
 
       <aside class="sticky-nav-box">
-        <h2>Home Page</h2>
+        <h2>Data Page</h2>
         <a class="box-nav-link" href="#b-graph">Bar Graph</a>
         <a class="box-nav-link" href="#cal">Calender</a>
-        <a class="box-nav-link" href="#l-guide">Line Graph</a>
+        <a class="box-nav-link" href="#slideshow">Slide show</a>
       </aside>
 
       <section id="headings">
@@ -83,31 +83,31 @@
       <section id="b-graph">
         <p class="graph-i i">
           The following graph depicts the most common words found in the titles
-          of this month’s Astronomy picture of the day.
+          of the previous months Astronomy picture of the day.
         </p>
         <p class="graph-i i">
-          With this you are able to see the most common keywords for this month,
-          understanding what ideas are reoccurring or the most popular in the
-          months APOD.
+          With this you are able to see the most common keywords for the past
+          month, understanding what ideas are reoccurring or the most popular.
         </p>
         <figure id="bar-graph"></figure>
       </section>
 
-      <section id="cal">
-        <p class="calender-i i">
-          The following interactive calendar displays all the APODs for the
-          current month in case you wish to take a trip back in time and view
-          some of the stunning pictures from this month.
+      <section id="slide-show">
+        <p class="slide-show-i i">
+          To ensure that you have no missed any of the current months stunning
+          photos, here is a slideshow of all the images from this months APOD.
         </p>
-        <figure id="calendar"></figure>
-      </section>
-
-      <section id="l-graph">
-        <p class="line-graph-i i">
-          With this graph you can see the top 10 words for the whole of 2023
-          giving you a better understandings of the entire years trending topics
-        </p>
-        <figure id="line-graph"></figure>
+        <article id="slideshow">
+          <figure class="slideshow-container">
+            <figure class="slideshow-slide">
+              <img id="apod-image" src="" alt="APOD Image" />
+              <figcaption class="slideshow-text">
+                <h2 id="apod-title"></h2>
+                <p id="apod-date"></p>
+              </figcaption>
+            </figure>
+          </figure>
+        </article>
       </section>
     </main>
 
