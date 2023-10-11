@@ -97,3 +97,34 @@ svg {
     transform: translateX(-100%);
   }
 }
+#apod-hold {
+  width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+#apod-img {
+  max-width: 100%;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s;
+  transform-origin: center center;
+}
+
+#apod-img:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s;
+}
+
+#t-apod-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: none;
+}

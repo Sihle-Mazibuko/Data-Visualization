@@ -178,6 +178,38 @@ function drawBarGraph(topWords) {
     .text("Frequency");
 }
 
+async function TodaysAPOD() {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
+  const apodImage = document.getElementById("apod-img");
+  const apodTitle = document.getElementById("t-apod-title");
+
+  try {
+    const response = await fetch(
+      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
+    );
+    const data = await response.json();
+
+    if (data.date && data.title && data.url) {
+      apodImage.src = data.url;
+      apodImage.title = data.title;
+      apodTitle.textContent = data.title;
+      apodTitle.style.display = "block";
+      apodImage.addEventListener("mousemove", (event) => {
+        const rect = apodImage.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+
+        const originX = (mouseX / rect.width) * 100;
+        const originY = (mouseY / rect.height) * 100;
+        apodImage.style.transformOrigin = `${originX}% ${originY}%`;
+      });
+    }
+  } catch (error) {
+    console.error("Error fetching APOD: ", error);
+  }
+}
+
+TodaysAPOD();
 fetchAPODs();
 
 updateSlide();
