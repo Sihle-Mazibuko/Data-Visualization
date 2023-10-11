@@ -126,5 +126,10 @@ svg {
   padding: 5px;
   border-radius: 5px;
   font-size: 14px;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+#apod-hold:hover #t-apod-title {
+  opacity: 1;
 }

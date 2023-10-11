@@ -194,6 +194,7 @@ async function TodaysAPOD() {
       apodImage.title = data.title;
       apodTitle.textContent = data.title;
       apodTitle.style.display = "block";
+
       apodImage.addEventListener("mousemove", (event) => {
         const rect = apodImage.getBoundingClientRect();
         const mouseX = event.clientX - rect.left;
