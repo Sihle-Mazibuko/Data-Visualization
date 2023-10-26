@@ -1,4 +1,18 @@
 let currentDay = 1;
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 async function updateSlide() {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
@@ -37,7 +51,63 @@ async function updateSlide() {
   setTimeout(updateSlide, 3000);
 }
 
+async function fetchAPODsForPreviousMonth() {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
+  const titles = [];
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+  const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+
+  const daysInMonth = new Date(previousYear, previousMonth, 0).getDate();
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = `${previousYear}-${previousMonth
+      .toString()
+      .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (data.date && data.title && data.url) {
+        titles.push(data.title);
+      }
+    } catch (error) {
+      console.error(`Error fetching data for ${date}: ${error}`);
+    }
+  }
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const previousMonthName = monthNames[previousMonth - 1];
+  const heading = document.getElementById("graph-title");
+  const monthYear = document.getElementById("month-year");
+  monthYear.textContent = `${previousMonthName} ${previousYear}`;
+  heading.textContent = `Top Words For ${previousMonthName} ${previousYear}`;
+
+  const topWords = getTopWords(titles);
+  drawBarGraph(topWords, previousMonthName, previousYear);
+}
+
 async function fetchAPODs() {
+  await fetchAPODsForPreviousMonth();
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const titles = [];
 
@@ -96,7 +166,8 @@ function getTopWords(titles) {
   return wordCountArray.slice(0, 5);
 }
 
-function drawBarGraph(topWords) {
+function drawBarGraph(topWords, previousMonthName, previousYear) {
+  d3.select("#bar-graph svg").remove();
   const margin = { top: 60, right: 60, bottom: 80, left: 80 };
   const width = 1100 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -156,7 +227,9 @@ function drawBarGraph(topWords) {
     .style("font-size", "20px")
     .style("fill", "white")
     .classed("underline", true)
-    .text("Top 5 Most Common Words in the September 2023 APOD");
+    .text(
+      `Top 5 Most Common Words in the ${previousMonthName} ${previousYear} APOD`
+    );
 
   svg
     .append("text")

@@ -72,28 +72,34 @@
       <aside class="sticky-nav-box">
         <h2>Data Page</h2>
         <a class="box-nav-link" href="#b-graph">Bar Graph</a>
-        <a class="box-nav-link" href="#slideshow">Slide show</a>
+        <a class="box-nav-link" href="#slide-show">Slide show</a>
         <a class="box-nav-link" href="#image">Todays APOD</a>
+        <a class="box-nav-link" href="#data-artwork">Data Artwork</a>
       </aside>
 
-      <section id="headings">
-        <h1>APOD Data</h1>
-      </section>
+      <h1>APOD Data</h1>
 
       <section id="b-graph">
-        <p class="graph-i i">
-          The following graph depicts the most common words found in the titles
-          of the previous months Astronomy picture of the day.
-        </p>
-        <p class="graph-i i">
-          With this you are able to see the most common keywords for the past
-          month, which helps with understanding what ideas are reoccurring or
-          the most popular.
-        </p>
+        <h2 class="section-heading" id="graph-title">
+          Top Words For <span id="month-year"></span>
+        </h2>
+
+        <article class="graph-i i">
+          <p>
+            The following graph depicts the most common words found in the
+            titles of the previous months Astronomy picture of the day.
+          </p>
+          <p>
+            With this you are able to see the most common keywords for the past
+            month, which helps with understanding what ideas are reoccurring or
+            the most popular.
+          </p>
+        </article>
         <figure id="bar-graph"></figure>
       </section>
 
       <section id="slide-show">
+        <h2 class="section-heading">Slide show</h2>
         <p class="slide-show-i i">
           To ensure that you have no missed any of the current months stunning
           photos, here is a slideshow of all the images from this months APOD.
@@ -112,17 +118,26 @@
       </section>
 
       <section id="image">
+        <h2 class="section-heading">Todays APOD</h2>
+
         <p class="image-i i">
           Take some time to enjoy todays beautiful APOD with this interactive
           image
         </p>
         <article id="apod-hold">
-          <img id="apod-img" src="" alt="Todays APOD" />
           <figcaption id="apod-i">
             <h2 id="t-apod-title"></h2>
             <p id="t-apod-author"></p>
           </figcaption>
+
+          <img id="apod-img" src="" alt="Todays APOD" />
         </article>
+      </section>
+
+      <section id="data-artwork">
+        <figure class="solar-system">
+          <svg id="solar-system-svg"></svg>
+        </figure>
       </section>
     </main>
 

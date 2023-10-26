@@ -44,18 +44,17 @@
 
 .sticky-nav-box {
   position: sticky;
-  top: 200px;
-  width: 200px;
+  top: 100px;
+  width: 250px;
   color: #fff;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 20px;
   border: 2px solid white;
 }
 
 .box-nav-link {
   display: block;
   margin-bottom: 10px;
-  text-decoration: none;
   color: #fff;
   transition: background-color 0.3s;
 }
