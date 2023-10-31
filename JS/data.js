@@ -414,7 +414,6 @@ async function createSolarSystem() {
 }
 
 createSolarSystem();
-
-// TodaysAPOD();
-// fetchAPODs();
-// updateSlide();
+TodaysAPOD();
+fetchAPODs();
+updateSlide();
