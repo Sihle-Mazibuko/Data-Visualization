@@ -78,13 +78,12 @@
         <h1>Blogs</h1>
 
         <ul class="blog-menu">
-          <li class="btn" data-article="article1">
-            Overview of Data Visualisation
-          </li>
-          <li class="btn" data-article="article2">Proposed UI and UX</li>
+          <li class="btn" data-article="article1">Data Visualisation</li>
+          <li class="btn" data-article="article2">UI and UX</li>
           <li class="btn" data-article="article3">
             Interaction for Data Visualisation
           </li>
+          <li class="btn" data-article="article4">Data-Driven Artwork</li>
         </ul>
       </section>
 
@@ -467,6 +466,209 @@
               https://doi.org/10.1109/TVCG.2019.2934283
             </p>
           </div>
+        </article>
+        <article class="blog" id="article4">
+          <h2 class="blog-title">Critical reflection of Data-Driven Artwork</h2>
+          <h3 class="paragraph-title">The vision for the site:</h3>
+
+          <p class="blog-p">
+            Creating artwork can be an impossible task to conquer as the canvas
+            for creativity is large, however, narrowing it down to an artwork
+            that uses data to convey information and also display the artist’s
+            efforts and brilliance should make the task relatively simpler. The
+            requirement of having the artwork relay information makes the task
+            simple as it suggests the artwork must possess some meaning and
+            significance, with emphasis on holding significance. Couple with the
+            currently existing data that includes the most popular words in the
+            previous APOD months, it is then essential to find out what else is
+            popular with regards to space in general as this is a space-themed
+            website. This research regarding the most searched space topics was
+            conducted.
+          </p>
+          <h3 class="paragraph-title">Fetching Data:</h3>
+
+          <p class="blog-p">
+            According to data gathered from a variety of sources, (Greene, 2019;
+            Mondovo, n.d.; NASA, 2022; Potor, 2020; West Texas A&M University,
+            n.d.) and a spreadsheet made from the data collected the following
+            topics were the most commonly occurring in all of the aforementioned
+            sources.
+          </p>
+
+          <figure>
+            <img
+              class="blog-img"
+              src="../images/BAR GRAPH.png"
+              alt="Image of showing a graph of the most commonly search space topics"
+            />
+          </figure>
+          <h3 class="paragraph-title">Findings:</h3>
+
+          <p class="blog-p">
+            From all of this data collection, a foregone conclusion can be made
+            the universe is common that the universe is the most popular topic.
+            This already makes things harder as the universe is a very large
+            thing with a lot more complex and complicated things within it. As
+            such I turned towards the other most popular terms namely Earth, the
+            Moon, and Stars and this gave me an idea of what to make, some form
+            of star system using the APODs as surface materials for the planets.
+            Another factor in this decision besides these three topics being the
+            most is a TikTok trend whereby users made random objects into
+            planets.
+          </p>
+          <figure>
+            <img
+              src="../images/TIKTOK TREND.png"
+              alt="Screenshot of a TikTok explore page"
+            />
+            <figcaption>
+              <p class="blog-p">
+                From this, you can see not only are there interesting shapes and
+                creations, but the view count is high meaning this sort of
+                creative pursuit is popular. With all of this, a solid plan was
+                made to not only create an artwork but to create an informative
+                artwork. It is important however to note that this plan is not
+                foolproof and has its flaws.
+              </p>
+            </figcaption>
+          </figure>
+
+          <h3 class="paragraph-title">Strenghts and weakness:</h3>
+          <p class="blog-p">
+            The first is completely ignoring the most popular topic in the
+            universe. This does have the potential of drawing away potential
+            users who love looking at things related to the universe; however,
+            this can be countered by how the images can be any APOD and as such
+            a planet at any given time can be the universe. Another major
+            problem, which is consistent in most art is ensuring the users
+            understand what they are interpreting. Providing an explanation does
+            help with this however not everyone wants to or will read a long
+            paragraph or headings detailing what they see, from the first view
+            the user should be able to understand. The strength of this type of
+            data art is that it follows suit to the theme of the website which
+            is displaying beautiful images of our universe. Choosing to have
+            images be planets creates one giant image of a unique star system
+            which can be visually pleasing to view for those who enjoy looking
+            at different planets and star systems.  
+          </p>
+
+          <h3 class="paragraph-title">Solar system progress</h3>
+          <figure>
+            <img
+              src="../images/SOLAR SYSTEM.png"
+              alt="Screenshot of the solar system prototype"
+            />
+            <figcaption>
+              <p>
+                Although unfinished this is the current prototype for what the
+                solar system should be (as of 22/10/2023).
+              </p>
+            </figcaption>
+          </figure>
+          <p class="blog-p">
+            Currently, it is static, and the planets and sun are not APOD
+            pictures however this is a good foundation to work on. The large
+            size of the star system and tiny planets make it synonymous with our
+            solar system with the 4 rocky planets. This ensures some form of
+            familiarity as most people who are aware of the solar system know
+            the four planets and this familiarity ensures viewers already have
+            some form of understanding of what they are viewing. There is the
+            use of the grey container to hold the solar system is for viewing
+            and will not be there in the final product as in the finished
+            product this star system will blend in with the star background
+            making it look like you are looking at a picture of a star system
+            and this can also make the viewer believe this is a unique APOD
+            staying true to the main purpose of this site which is showing
+            beautiful pictures. From here the solar system will be interactable
+            in terms of a hover effect whereby the planets get bigger and
+            information on the planet (such as APOD name, author, and date) will
+            be displayed to ensure viewers understand the star system.
+          </p>
+
+          <h3 class="paragraph-title">
+            Experience with the data-driven artwork
+          </h3>
+          <p class="blog-p">
+            Designing a solar system using d3.js was a tough but rewarding
+            experience. As a student, I had to learn a lot about the library and
+            how to use it to create interactive data visualizations. One of the
+            most difficult aspects for me was figuring out how to make the
+            planets move and continuously move. It was a lot of work, but it was
+            also really interesting to learn about these methods for how to
+            create motion on websites. Another challenge was creating a user
+            interface that was both informative and easy to use. I wanted to
+            allow users to explore the star system at their own pace and learn
+            about the different APOD planets. I also wanted to make sure that
+            the visualization was visually appealing and engaging. I spent a lot
+            of time experimenting with different sizes, colours, orbit speeds
+            and fine details like the rotation on the axis of the APOD planets
+            before I finally found something that I was happy with. Overall, I'm
+            really glad that I had the opportunity to work on this project. It
+            was a challenging but rewarding experience. I learned a lot about
+            d3.js and data visualization, and I also gained a deeper
+            understanding of data visualisation and web design.
+          </p>
+
+          <h3 class="paragraph-title">How it felt</h3>
+          <p class="blog-p">
+            To better understand this creative journey here are some thoughts
+            and feelings I experienced during the creation of this website:
+          </p>
+          <ol class="blog-p">
+            <li>
+              • Frustration: There were many times when I got stuck and didn't
+              know how to proceed. I had to spend a lot of time on generative AI
+              platforms, YouTube and online sources looking for answers
+              (sometimes this was a dead-end).
+            </li>
+            <li>
+              • Excitement: When I finally got something working, it was very
+              exciting. I was especially excited when I got the orbits of the
+              planets working correctly.
+            </li>
+            <li>
+              • Challenge: I enjoyed the challenge of designing a complex and
+              interactive visualization. It was a great opportunity to learn new
+              skills and push myself outside of my comfort zone. I'm proud of
+              the fact that I was able to overcome the challenges and create a
+              successful project.
+            </li>
+          </ol>
+          <p class="blog-p">
+            I would recommend this project to other students who are interested
+            in learning about data visualization and d3.js and just being
+            creative in terms of web design. It is a challenging but rewarding
+            experience.
+          </p>
+
+          <article class="ref-hold" id="references">
+            <h3>References</h3>
+            <p>
+              Greene, N., 2019. Frequently Asked Questions About Astronomy and
+              Space [WWW Document]. ThoughtCo. URL
+              https://www.thoughtco.com/faq-space-questions-3071107
+            </p>
+            <p>
+              Mondovo, n.d. 350+ Most Asked “Space” Questions Revealed. Top
+              Keywords. URL
+              https://www.mondovo.com/keywords/most-asked-space-questions-on-google
+            </p>
+            <p>
+              NASA, 2022. What is the Universe? | What is an Exoplanet? [WWW
+              Document]. Exopl. Explor. Planets Our Sol. Syst. URL
+              https://exoplanets.nasa.gov/what-is-an-exoplanet/what-is-the-universe
+            </p>
+            <p>
+              Potor, M., 2020. The most frequently asked questions about space -
+              and their answers. BASIC Think. Int. URL
+              https://www.basicthinking.com/questions-about-space-answers/
+            </p>
+            <p>
+              West Texas A&M University, n.d. Space Questions | Science
+              Questions with Surprising Answers [WWW Document]. URL
+              https://www.wtamu.edu/~cbaird/sq/category/space/
+            </p>
+          </article>
         </article>
       </section>
     </main>

@@ -6,25 +6,12 @@ h2 {
 
 section {
   padding: 15px 5%;
+  margin: 20px 0;
 }
 
 svg {
   display: block;
   margin: 30px auto 0;
-  background-color: rgb(55, 55, 55);
-  border: 2px solid darkgrey;
-}
-
-@media (max-width: 500px) {
-  section {
-    padding: 80px 10%;
-  }
-}
-
-@media (max-width: 430px) {
-  section {
-    padding: 40px 0 0 -50px 10%;
-  }
 }
 
 .x-axis text {
@@ -54,40 +41,38 @@ svg {
 }
 
 #slideshow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
 .slideshow-container {
-  width: 600px;
-  height: 600px;
-  overflow: hidden;
-  position: relative;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slideshow-slide {
+  flex: 1;
   text-align: center;
 }
 
-.slideshow-container img {
-  width: 100%;
-  height: 50%;
-  object-fit: cover;
+.ss-apod-image {
+  max-width: 100%;
+  height: auto;
 }
 
 .slideshow-text {
+  margin-top: 10px;
   text-align: center;
-  padding: 10px;
 }
 
-#apod-title {
+#ss-apod-title {
   font-size: 20px;
   color: white;
 }
 
-#apod-date {
+#ss-apod-date {
   font-size: 14px;
   color: white;
 }
@@ -100,6 +85,7 @@ svg {
     transform: translateX(-100%);
   }
 }
+
 #apod-hold {
   width: 600px;
   margin: 0 auto;
@@ -171,6 +157,38 @@ svg {
 }
 
 #solar-system-svg {
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
+}
+
+@keyframes gradientMove {
+  0% {
+    stop-color: darkred;
+
+    offset: 0%;
+  }
+  25% {
+    stop-color: red;
+    offset: 25%;
+  }
+  50% {
+    stop-color: orangered;
+    offset: 50%;
+  }
+  75% {
+    stop-color: red;
+    offset: 75%;
+  }
+  100% {
+    stop-color: darkred;
+    offset: 100%;
+  }
+}
+
+#sunGradient stop {
+  animation: gradientMove 10s linear infinite;
+}
+
+.data-art {
+  padding-bottom: 50px;
 }

@@ -38,6 +38,7 @@ section {
 .ref-hold {
   font-size: 0.9rem;
   text-align: justify;
+  padding: 30px 0 30px 0;
 }
 
 .ref-hold h3 {
@@ -98,4 +99,9 @@ section {
 
 .paragraph-title {
   margin: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

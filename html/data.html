@@ -104,17 +104,31 @@
           To ensure that you have no missed any of the current months stunning
           photos, here is a slideshow of all the images from this months APOD.
         </p>
-        <article id="slideshow">
-          <figure class="slideshow-container">
-            <figure class="slideshow-slide">
-              <img id="apod-image" src="" alt="APOD Image" />
+        <section id="slideshow">
+          <article class="slideshow-container">
+            <figure class="slideshow-slide" id="previous-slide">
+              <img class="ss-apod-image" src="" alt="Previous APOD Image" />
               <figcaption class="slideshow-text">
-                <h2 id="apod-title"></h2>
-                <p id="apod-date"></p>
+                <h2 class="ss-apod-title"></h2>
+                <p class="ss-apod-date"></p>
               </figcaption>
             </figure>
-          </figure>
-        </article>
+            <figure class="slideshow-slide" id="current-slide">
+              <img class="ss-apod-image" src="" alt="Current APOD Image" />
+              <figcaption class="slideshow-text">
+                <h2 class="ss-apod-title"></h2>
+                <p class="ss-apod-date"></p>
+              </figcaption>
+            </figure>
+            <figure class="slideshow-slide" id="next-slide">
+              <img class="ss-apod-image" src="" alt="Next APOD Image" />
+              <figcaption class="slideshow-text">
+                <h2 class="ss-apod-title"></h2>
+                <p class="ss-apod-date"></p>
+              </figcaption>
+            </figure>
+          </article>
+        </section>
       </section>
 
       <section id="image">
@@ -135,6 +149,22 @@
       </section>
 
       <section id="data-artwork">
+        <article class="data-art">
+          <h2 class="section-heading">Data-Driven Artwork</h2>
+          <p class="i">
+            Space and APOD have something in common, they both have the most
+            stunning displays you will ever see with some even being the most
+            unique sightings.
+          </p>
+          <p class="i">
+            This artwork uses the top 3 APODS (as per
+            <a
+              href="https://orbitingfrog.com/2007/08/29/top-ten-astronomy-pictures-of-the-day-apod/"
+              >orbitingfrog.com</a
+            >) to create a star system of APODs
+          </p>
+        </article>
+
         <figure class="solar-system">
           <svg id="solar-system-svg"></svg>
         </figure>

@@ -14,43 +14,6 @@ const monthNames = [
   "December",
 ];
 
-async function updateSlide() {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-  const slideshowContainer = document.getElementById("slideshow-container");
-  const apodImage = document.getElementById("apod-image");
-  const apodTitle = document.getElementById("apod-title");
-  const apodDate = document.getElementById("apod-date");
-
-  if (currentDay <= 31) {
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-    const date = `${currentYear}-${currentMonth
-      .toString()
-      .padStart(2, "0")}-${currentDay.toString().padStart(2, "0")}`;
-    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-
-      if (data.date && data.title && data.url) {
-        apodImage.src = data.url;
-        apodTitle.textContent = data.title;
-        apodDate.textContent = data.date;
-        currentDay++;
-      } else {
-        currentDay = 1;
-      }
-    } catch (error) {
-      console.error(`Error fetching data for ${date}: ${error}`);
-    }
-  } else {
-    currentDay = 1;
-  }
-
-  setTimeout(updateSlide, 3000);
-}
-
 async function fetchAPODsForPreviousMonth() {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const titles = [];
@@ -169,8 +132,10 @@ function getTopWords(titles) {
 function drawBarGraph(topWords, previousMonthName, previousYear) {
   d3.select("#bar-graph svg").remove();
   const margin = { top: 60, right: 60, bottom: 80, left: 80 };
+
   const width = 1100 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
+
   const svg = d3
     .select("#bar-graph")
     .append("svg")
@@ -283,7 +248,173 @@ async function TodaysAPOD() {
   }
 }
 
-TodaysAPOD();
-fetchAPODs();
+async function updateSlide() {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
 
-updateSlide();
+  document.addEventListener("DOMContentLoaded", async function () {
+    const previousSlide = document.getElementById("previous-slide");
+    const currentSlide = document.getElementById("current-slide");
+    const nextSlide = document.getElementById("next-slide");
+
+    const updateSlideContent = (element, data) => {
+      const image = element.querySelector(".ss-apod-image");
+      const title = element.querySelector(".ss-apod-title");
+      const date = element.querySelector(".ss-apod-date");
+
+      if (data.url) {
+        image.setAttribute("src", data.url);
+        title.textContent = data.title;
+        date.textContent = data.date;
+      }
+    };
+
+    let currentDay = 1;
+
+    const fetchDataAndUpdateSlides = async () => {
+      if (currentDay <= 28) {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+        const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+        try {
+          for (let i = 0; i < 3; i++) {
+            const date = `${currentYear}-${String(currentMonth).padStart(
+              2,
+              "0"
+            )}-${String(currentDay).padStart(2, "0")}`;
+            const response = await fetch(`${apiUrl}&date=${date}`);
+            const data = await response.json();
+
+            if (data.date && data.title && data.url) {
+              if (i === 0) {
+                updateSlideContent(previousSlide, data);
+              } else if (i === 1) {
+                updateSlideContent(currentSlide, data);
+              } else if (i === 2) {
+                updateSlideContent(nextSlide, data);
+              }
+            } else {
+              currentDay = 1;
+            }
+
+            currentDay++;
+          }
+
+          await new Promise((resolve) => setTimeout(resolve, 4000));
+        } catch (error) {
+          console.error(`Error fetching data: ${error}`);
+        }
+
+        fetchDataAndUpdateSlides();
+      }
+    };
+
+    fetchDataAndUpdateSlides();
+  });
+}
+
+async function createSolarSystem() {
+  const width = 800;
+  const height = 800;
+
+  const svg = d3
+    .select("#solar-system-svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  const sunGradient = svg
+    .append("defs")
+    .append("radialGradient")
+    .attr("id", "sunGradient")
+    .attr("cx", "50%")
+    .attr("cy", "50%")
+    .attr("r", "50%")
+    .attr("fx", "50%")
+    .attr("fy", "50%");
+
+  sunGradient
+    .append("stop")
+    .attr("offset", "0%")
+    .attr("style", "stop-color: #ffcc00");
+  sunGradient
+    .append("stop")
+    .attr("offset", "30%")
+    .attr("style", "stop-color: #ff9933");
+  sunGradient
+    .append("stop")
+    .attr("offset", "50%")
+    .attr("style", "stop-color: #ff751a");
+  sunGradient
+    .append("stop")
+    .attr("offset", "70%")
+    .attr("style", "stop-color: #ff3300");
+  sunGradient
+    .append("stop")
+    .attr("offset", "100%")
+    .attr("style", "stop-color: #ff1a1a");
+
+  svg
+    .append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", 60)
+    .style("fill", "url(#sunGradient)")
+    .style("stroke", "none");
+
+  const orbits = [
+    { radius: 180, color: "lightblue" },
+    { radius: 260, color: "lightgreen" },
+    { radius: 360, color: "lightgrey" },
+  ];
+
+  svg
+    .selectAll(".orbit")
+    .data(orbits)
+    .enter()
+    .append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", (d) => d.radius)
+    .style("fill", "none")
+    .style("stroke", (d) => d.color);
+
+  const planetGroups = svg
+    .selectAll(".planet")
+    .data([
+      { angle: 0, speed: 0.8, distance: 180, color: "../images/first.jpg" },
+      { angle: 0, speed: 0.3, distance: 260, color: "../images/second.jpg" },
+      { angle: 0, speed: 1, distance: 360, color: "../images/third.jpg" },
+    ])
+    .enter()
+    .append("g")
+    .attr("class", "planet");
+  planetGroups.each(function (d) {
+    d3.select(this)
+      .append("image")
+      .attr("xlink:href", d.color)
+      .attr("width", 70)
+      .attr("height", 70)
+      .attr("x", width / 2 + d.distance - 35)
+      .attr("y", height / 2 - 35);
+  });
+
+  function animatePlanets() {
+    planetGroups.each(function (d) {
+      d.angle += d.speed * 0.005;
+      d3.select(this)
+        .select("image")
+        .attr("x", width / 2 + d.distance * Math.cos(d.angle) - 35)
+        .attr("y", height / 2 + d.distance * Math.sin(d.angle) - 35);
+    });
+
+    requestAnimationFrame(animatePlanets);
+  }
+
+  animatePlanets();
+}
+
+createSolarSystem();
+
+// TodaysAPOD();
+// fetchAPODs();
+// updateSlide();

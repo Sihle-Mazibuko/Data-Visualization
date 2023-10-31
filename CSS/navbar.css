@@ -60,7 +60,7 @@ header {
   width: 0;
   height: 2px;
   background: #aa2704;
-  bottom: -3px;
+  bottom: 20px;
   left: 0;
   transition: ease 0.4s;
 }
@@ -74,6 +74,7 @@ header {
   z-index: 10001;
   cursor: pointer;
   display: none;
+  background: none;
 }
 
 header.sticky {
@@ -85,7 +86,7 @@ header.sticky {
   }
   .navlist,
   .navlist li {
-    background: none;
+    background: #181818;
   }
 }
 

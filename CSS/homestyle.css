@@ -62,16 +62,24 @@ section {
     padding: 70px 3%;
     transition: 0.3s;
   }
-
-  #apod-img {
-    width: 800px;
-  }
 }
 
 @media (max-width: 900px) {
   section {
     padding: 50% 7%;
     transition: 0.3s;
+  }
+  .page-links-content {
+    flex-direction: column;
+  }
+  .row {
+    height: auto;
+    max-width: 100%;
+  }
+  .colour-swatch {
+    padding: 5px;
+    margin: 0.3rem 0;
+    box-shadow: none;
   }
 }
 
@@ -86,12 +94,11 @@ section {
   background-color: rgba(210, 210, 210, 0.248);
   border-radius: 4px;
   padding: 10px;
-  margin: 0.625rem 0 0.625rem 25rem;
   box-shadow: 0 10px 10px -4px rgba(255, 255, 255, 0.484);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 100%;
 }
 
 .colour-swatch ul {
@@ -222,9 +229,8 @@ section {
 }
 
 .page-links-content {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 8rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-top: 2rem;
   cursor: pointer;
@@ -238,10 +244,11 @@ section {
   background: #aa2704;
   box-shadow: 12px 0 35px 0 rgb(73, 73, 73);
   border-radius: 12px;
-  padding: 45px 45px 45px 45px;
+  padding: 45px;
   transition: 0.3s;
-  width: 500px;
-  height: 200px;
+  width: 100%;
+  margin: 20px 0;
+  max-width: 500px;
 }
 
 .link-img {
@@ -282,6 +289,7 @@ section {
 
 #image-title {
   font-size: 2.5rem;
+  margin-top: -100px;
 }
 
 #image-title,
@@ -289,6 +297,10 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#img-date {
+  padding-bottom: 30px;
 }
 
 #img-date::before {
@@ -299,20 +311,12 @@ section {
   content: ")";
 }
 
-#apod-img {
-  width: 1100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
 #img-description {
-  text-align: inherit;
-  margin-left: 50px;
-  line-height: 20px;
-  letter-spacing: 1px;
-  font-size: 0.8rem;
+  padding-left: 50px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  text-align: left;
 }
 
 .home-description {
@@ -346,4 +350,92 @@ section {
 .sticky-nav-box h2 {
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+
+#apod-img {
+  max-width: 100%;
+  height: auto;
+  padding-left: 50px;
+}
+
+.plans-contain {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 100px 50px;
+  padding: 100px 50px;
+  background: none;
+}
+
+.plan-card {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  width: 350px;
+  height: 350px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 20px rgba(249, 249, 249, 0.256);
+  transition: 0.3s;
+}
+
+.plan-card:hover {
+  height: 450px;
+}
+
+.plan-img {
+  position: absolute;
+  width: 220px;
+  height: 330px;
+  background: gray;
+  top: 10px;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.plan-card:hover .plan-img {
+  top: -80px;
+  scale: 0.75;
+  box-shadow: 0 15px 45px black;
+}
+
+.plan-card .content {
+  position: absolute;
+  top: 322px;
+  width: 100%;
+  padding: 0 30px;
+  height: 22px;
+  text-align: left;
+  overflow: hidden;
+  transition: 0.3s;
+  background: none;
+}
+
+.plan-card:hover .content {
+  top: 230px;
+  height: 250px;
+}
+
+.plan-card .content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: none;
+  color: black;
+}
+
+.plan-card .content ul {
+  background: none;
+}
+
+.plan-card .content li::before {
+  content: "•";
+  margin-left: 8px;
+}
+
+.plan-card .content li {
+  color: black;
+  background: none;
 }

@@ -33,8 +33,8 @@
       rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     />
-    <link rel="stylesheet" href="./CSS/homestyle.css" />
     <link rel="stylesheet" href="./CSS/normal.css" />
+    <link rel="stylesheet" href="./CSS/homestyle.css" />
     <link rel="stylesheet" href="./CSS/background.css" />
     <link rel="stylesheet" href="./CSS/navbar.css" />
     <script type="text/javascript" src="./JS/home.js"></script>
@@ -84,6 +84,7 @@
         <a class="box-nav-link" href="#home-page">APOD</a>
         <a class="box-nav-link" href="#old-designs">Wireframes</a>
         <a class="box-nav-link" href="#style-guide">Style Guide</a>
+        <a class="box-nav-link" href="#planning">Planning Documentation</a>
         <a class="box-nav-link" href="#page-links">Blogs and Data</a>
       </aside>
 
@@ -104,7 +105,7 @@
       <section class="designs old-designs" id="old-designs">
         <h2 class="section-heading">Initial Wireframes:</h2>
         <p class="section-description">
-          These are the wireframes from the InSight API
+          These are the old wireframes for this website
         </p>
         <article class="items">
           <figure class="sub-box">
@@ -150,12 +151,12 @@
           <figure class="sub-box">
             <figure class="sub-img">
               <img
-                src="./images/DATA WF.jpg"
-                alt="Data visualisations wireframe"
+                src="./images/DV wireframe.jpg"
+                alt="Data visualisations page wireframe"
               />
             </figure>
-            <h3>Data visualisations wireframe</h3>
-            <p>This wireframe is that of the data visualisations section.</p>
+            <h3>Old data Page</h3>
+            <p>This wireframe is that of the APOD data visualisations.</p>
           </figure>
         </article>
       </section>
@@ -163,8 +164,7 @@
       <section class="designs new-designs" id="new-designs">
         <h2 class="section-heading">Current wireframes</h2>
         <p class="section-description">
-          These are the wireframes for the current APOD website. (Only changes
-          and new wireframes for new pages are shown here)
+          These are the wireframes for the current APOD website.
         </p>
 
         <article class="new-items">
@@ -175,19 +175,24 @@
                 alt="Blog page wireframe"
               />
             </figure>
-            <h3>New blog Page</h3>
-            <p>This wireframe is that of the new blog page.</p>
+            <h3>Current blog Page</h3>
+            <p>This wireframe is that of the current blog page.</p>
           </figure>
 
           <figure class="sub-box">
             <figure class="sub-img">
-              <img
-                src="./images/DV wireframe.jpg"
-                alt="Data visualisations page wireframe"
-              />
+              <img src="./images/C-DATA WF.jpg" alt="Data page wireframe" />
             </figure>
-            <h3>New data Page</h3>
-            <p>This wireframe is that of the APOD data visualisations.</p>
+            <h3>Current Data Page</h3>
+            <p>This wireframe is that of the current data page.</p>
+          </figure>
+
+          <figure class="sub-box">
+            <figure class="sub-img">
+              <img src="./images/C-HOME WF.jpg" alt="Home page wireframe" />
+            </figure>
+            <h3>Current Home Page</h3>
+            <p>This wireframe is that of the home blog page.</p>
           </figure>
 
           <figure class="sub-box">
@@ -228,6 +233,7 @@
           variety in the choice of colours.
         </p>
         <p>These are all the colours used on the website:</p>
+
         <figure class="colour-swatch">
           <ul>
             <li class="colour-item" id="Rusty-red"></li>
@@ -304,6 +310,83 @@
             >.
           </p>
         </figure>
+      </section>
+
+      <section id="planning">
+        <h2 class="section-heading">Planning Documentation</h2>
+        <p class="section-description">
+          This section of the website dives into the though process used when
+          creating the data visualizations page. Here information will be
+          provided on each data visualization seen on this website.
+        </p>
+
+        <article class="plans-contain">
+          <figure class="plan-card">
+            <img
+              class="plan-img"
+              src="./images/STATIC PLAN.jpg"
+              alt="Screenshot of static data visualisation plans"
+            />
+            <figcaption class="content">
+              <h3>Static Visualisations Plans</h3>
+              <ul>
+                <li>Both are not interactive</li>
+                <li>
+                  Explanation of the graph will be before/above it to ensure
+                  understanding is already established before viewing
+                </li>
+                <li>
+                  Graph will not have a background (illusion of floating through
+                  space)
+                </li>
+                <li>
+                  The slide show automatically updates and all 3 images will
+                  change
+                </li>
+              </ul>
+            </figcaption>
+          </figure>
+
+          <figure class="plan-card">
+            <img
+              class="plan-img"
+              src="./images/INTERACT PLAN.jpg"
+              alt="Screenshot of interactive data visualisation plans"
+            />
+            <figcaption class="content">
+              <h3>Interactive Visualisations Plans</h3>
+              <ul>
+                <li>The image will be its own container</li>
+                <li>Hovering/click will zoom into that section of the APOD</li>
+                <li>Allows for a better view of the APOD and its details</li>
+                <li>Hovering also shows the title of the APOD</li>
+              </ul>
+            </figcaption>
+          </figure>
+
+          <figure class="plan-card">
+            <img
+              class="plan-img"
+              src="./images/DDA PLAN.jpg"
+              alt="Screenshot of data driven art plans"
+            />
+            <figcaption class="content">
+              <h3>Data-Driven Artwork Plans</h3>
+              <ul>
+                <li>
+                  Planets/Stars rotate on their own orbit and planets also orbit
+                  sun
+                </li>
+                <li>On hover the name and date of APOD will appear</li>
+                <li>On click the image will appear</li>
+                <li>
+                  For option 2: title and date will be there at all times under
+                  the planets
+                </li>
+              </ul>
+            </figcaption>
+          </figure>
+        </article>
       </section>
 
       <section class="page-links" id="page-links">
