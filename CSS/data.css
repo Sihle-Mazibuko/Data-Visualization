@@ -40,43 +40,6 @@ svg {
   margin-bottom: -100px;
 }
 
-#slideshow {
-  width: 100%;
-  overflow: hidden;
-}
-
-.slideshow-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  transition: transform 0.5s ease-in-out;
-}
-
-.slideshow-slide {
-  flex: 1;
-  text-align: center;
-}
-
-.ss-apod-image {
-  max-width: 100%;
-  height: auto;
-}
-
-.slideshow-text {
-  margin-top: 10px;
-  text-align: center;
-}
-
-#ss-apod-title {
-  font-size: 20px;
-  color: white;
-}
-
-#ss-apod-date {
-  font-size: 14px;
-  color: white;
-}
-
 @keyframes slide {
   0% {
     transform: translateX(100%);
@@ -84,43 +47,6 @@ svg {
   100% {
     transform: translateX(-100%);
   }
-}
-
-#apod-hold {
-  width: 600px;
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-}
-
-#apod-img {
-  max-width: 100%;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.3s;
-  transform-origin: center center;
-}
-
-#apod-img:hover {
-  transform: scale(1.5);
-  transition: transform 0.3s;
-}
-
-#t-apod-title {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-#apod-hold:hover #t-apod-title {
-  opacity: 1;
 }
 
 @media (max-width: 1425px) {
@@ -133,6 +59,9 @@ svg {
   #b-graph {
     padding: 50% 7%;
     transition: 0.3s;
+  }
+  .calendar-container {
+    width: 100%;
   }
 }
 
@@ -191,4 +120,62 @@ svg {
 
 .data-art {
   padding-bottom: 50px;
+}
+
+.calendar-container {
+  margin: 20px auto 0;
+  width: 900px;
+  height: 500px;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.calendar-header {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: black;
+  background: none;
+}
+
+.calendar-day {
+  width: 100%;
+  height: 55px;
+  text-align: center;
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+  line-height: 55px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transition 0.1 ease-in-out;
+}
+
+.calendar-day:hover {
+  transform: scale(1.3);
+}
+
+.current-day {
+  background-color: wheat;
+}
+
+.calendar-spacer {
+  height: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  background-color: white;
+}
+
+.future-day {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
 }

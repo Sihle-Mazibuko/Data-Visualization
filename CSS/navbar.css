@@ -60,7 +60,7 @@ header {
   width: 0;
   height: 2px;
   background: #aa2704;
-  bottom: 20px;
+  bottom: -10px;
   left: 0;
   transition: ease 0.4s;
 }

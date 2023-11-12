@@ -111,7 +111,7 @@ function getTopWords(titles) {
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "")
     .toLowerCase();
   const words = titlesWords.split(/\s+/);
-  const ignore = ["a", "an", "the", "and", "of"];
+  const ignore = ["a", "an", "the", "and", "of", "in", "from"];
   const wordCount = {};
 
   words.forEach((word) => {
@@ -216,103 +216,6 @@ function drawBarGraph(topWords, previousMonthName, previousYear) {
     .text("Frequency");
 }
 
-async function TodaysAPOD() {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-  const apodImage = document.getElementById("apod-img");
-  const apodTitle = document.getElementById("t-apod-title");
-
-  try {
-    const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
-    );
-    const data = await response.json();
-
-    if (data.date && data.title && data.url) {
-      apodImage.src = data.url;
-      apodImage.title = data.title;
-      apodTitle.textContent = data.title;
-      apodTitle.style.display = "block";
-
-      apodImage.addEventListener("mousemove", (event) => {
-        const rect = apodImage.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-
-        const originX = (mouseX / rect.width) * 100;
-        const originY = (mouseY / rect.height) * 100;
-        apodImage.style.transformOrigin = `${originX}% ${originY}%`;
-      });
-    }
-  } catch (error) {
-    console.error("Error fetching APOD: ", error);
-  }
-}
-
-async function updateSlide() {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-
-  document.addEventListener("DOMContentLoaded", async function () {
-    const previousSlide = document.getElementById("previous-slide");
-    const currentSlide = document.getElementById("current-slide");
-    const nextSlide = document.getElementById("next-slide");
-
-    const updateSlideContent = (element, data) => {
-      const image = element.querySelector(".ss-apod-image");
-      const title = element.querySelector(".ss-apod-title");
-      const date = element.querySelector(".ss-apod-date");
-
-      if (data.url) {
-        image.setAttribute("src", data.url);
-        title.textContent = data.title;
-        date.textContent = data.date;
-      }
-    };
-
-    let currentDay = 1;
-
-    const fetchDataAndUpdateSlides = async () => {
-      if (currentDay <= 28) {
-        const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth() + 1;
-        const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-
-        try {
-          for (let i = 0; i < 3; i++) {
-            const date = `${currentYear}-${String(currentMonth).padStart(
-              2,
-              "0"
-            )}-${String(currentDay).padStart(2, "0")}`;
-            const response = await fetch(`${apiUrl}&date=${date}`);
-            const data = await response.json();
-
-            if (data.date && data.title && data.url) {
-              if (i === 0) {
-                updateSlideContent(previousSlide, data);
-              } else if (i === 1) {
-                updateSlideContent(currentSlide, data);
-              } else if (i === 2) {
-                updateSlideContent(nextSlide, data);
-              }
-            } else {
-              currentDay = 1;
-            }
-
-            currentDay++;
-          }
-
-          await new Promise((resolve) => setTimeout(resolve, 4000));
-        } catch (error) {
-          console.error(`Error fetching data: ${error}`);
-        }
-
-        fetchDataAndUpdateSlides();
-      }
-    };
-
-    fetchDataAndUpdateSlides();
-  });
-}
-
 async function createSolarSystem() {
   const width = 800;
   const height = 800;
@@ -413,7 +316,90 @@ async function createSolarSystem() {
   animatePlanets();
 }
 
-createSolarSystem();
-TodaysAPOD();
-fetchAPODs();
-updateSlide();
+async function drawCalendar(containerElement, currentDate) {
+  const calendarContainer = d3
+    .select(containerElement)
+    .append("div")
+    .classed("calendar-container", true);
+
+  const calendarHeader = calendarContainer
+    .append("div")
+    .classed("calendar-header", true)
+    .text(
+      `${new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth()
+      ).toLocaleString("default", { month: "long" })}`
+    );
+
+  const calendarDays = calendarContainer
+    .append("div")
+    .classed("calendar-days", true);
+
+  function addRowSpacer() {
+    calendarDays.append("div").classed("calendar-spacer", true);
+  }
+
+  const today = new Date();
+  let row = 0;
+
+  for (
+    let i = 1;
+    i <=
+    new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    ).getDate();
+    i++
+  ) {
+    const calendarDay = calendarDays
+      .append("div")
+      .classed("calendar-day", true)
+      .text(i);
+
+    if (
+      i === currentDate.getDate() &&
+      currentDate.getMonth() === currentDate.getMonth()
+    ) {
+      calendarDay.classed("current-day", true);
+    }
+
+    if (
+      new Date(currentDate.getFullYear(), currentDate.getMonth(), i) > today
+    ) {
+      calendarDay.classed("future-day", true);
+    }
+
+    calendarDay.on("mouseover", async function () {
+      const apodData = await fetchCalendarAPOD(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        i
+      );
+      console.log(apodData);
+    });
+
+    if (row === 6) {
+      row == 0;
+    } else {
+      row++;
+    }
+  }
+}
+
+async function fetchCalendarAPOD(year, month, day) {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
+
+  const response = await fetch(
+    `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${year}-${month}-${day}`
+  );
+  const data = await response.json();
+  return data;
+}
+
+const calendarContainer = document.getElementById("calendar-container");
+drawCalendar(calendarContainer, new Date());
+
+// createSolarSystem();
+// fetchAPODs();
