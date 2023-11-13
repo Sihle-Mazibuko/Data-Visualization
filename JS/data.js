@@ -316,7 +316,9 @@ async function createSolarSystem() {
   animatePlanets();
 }
 
-async function drawCalendar(containerElement, currentDate) {
+let selectedDay = null;
+
+function drawCalendar(containerElement, currentDate) {
   const calendarContainer = d3
     .select(containerElement)
     .append("div")
@@ -324,13 +326,18 @@ async function drawCalendar(containerElement, currentDate) {
 
   const calendarHeader = calendarContainer
     .append("div")
-    .classed("calendar-header", true)
-    .text(
-      `${new Date(
+    .classed("calendar-header", true);
+
+  calendarHeader.html(
+    `<button id="prev-month">Previous</button> 
+      ${new Date(
         currentDate.getFullYear(),
         currentDate.getMonth()
-      ).toLocaleString("default", { month: "long" })}`
-    );
+      ).toLocaleString("default", {
+        month: "long",
+      })} ${currentDate.getFullYear()}
+      <button id="next-month">Next</button>`
+  );
 
   const calendarDays = calendarContainer
     .append("div")
@@ -372,25 +379,71 @@ async function drawCalendar(containerElement, currentDate) {
     }
 
     calendarDay.on("mouseover", async function () {
+      try {
+        const apodData = await fetchCalendarAPOD(
+          currentDate.getFullYear(),
+          currentDate.getMonth() + 1,
+          i
+        );
+        console.log(apodData);
+      } catch (error) {
+        console.error("Error fetching APOD data:", error);
+      }
+    });
+
+    calendarDay.on("click", async function () {
+      selectedDay = i;
       const apodData = await fetchCalendarAPOD(
         currentDate.getFullYear(),
         currentDate.getMonth() + 1,
         i
       );
-      console.log(apodData);
+      openModal(
+        apodData.title,
+        apodData.url,
+        `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${i}`
+      );
     });
 
     if (row === 6) {
-      row == 0;
+      row = 0;
+      // addRowSpacer();
     } else {
       row++;
     }
   }
+
+  document.getElementById("prev-month").addEventListener("click", function () {
+    const previousMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - 1
+    );
+    drawCalendar(containerElement, previousMonth);
+  });
+
+  document.getElementById("next-month").addEventListener("click", function () {
+    const nextMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1
+    );
+    drawCalendar(containerElement, nextMonth);
+  });
+}
+
+function openModal(title, imageUrl, clickedDate) {
+  const modal = document.getElementById("modal");
+  const modalContent = document.getElementById("modal-content");
+  modalContent.innerHTML = `<h3>${title}</h3><p>Date: ${clickedDate}</p><img src="${imageUrl}" alt="${title}">`;
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 }
 
 async function fetchCalendarAPOD(year, month, day) {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-
   const response = await fetch(
     `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${year}-${month}-${day}`
   );
