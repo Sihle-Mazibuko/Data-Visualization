@@ -319,6 +319,8 @@ async function createSolarSystem() {
 let selectedDay = null;
 
 function drawCalendar(containerElement, currentDate) {
+  d3.select(containerElement).select(".calendar-container").remove();
+
   const calendarContainer = d3
     .select(containerElement)
     .append("div")
@@ -342,10 +344,6 @@ function drawCalendar(containerElement, currentDate) {
   const calendarDays = calendarContainer
     .append("div")
     .classed("calendar-days", true);
-
-  function addRowSpacer() {
-    calendarDays.append("div").classed("calendar-spacer", true);
-  }
 
   const today = new Date();
   let row = 0;
@@ -392,22 +390,23 @@ function drawCalendar(containerElement, currentDate) {
     });
 
     calendarDay.on("click", async function () {
-      selectedDay = i;
-      const apodData = await fetchCalendarAPOD(
-        currentDate.getFullYear(),
-        currentDate.getMonth() + 1,
-        i
-      );
-      openModal(
-        apodData.title,
-        apodData.url,
-        `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${i}`
-      );
+      if (!calendarDay.classed("future-day")) {
+        selectedDay = i;
+        const apodData = await fetchCalendarAPOD(
+          currentDate.getFullYear(),
+          currentDate.getMonth() + 1,
+          i
+        );
+        openModal(
+          apodData.title,
+          apodData.url,
+          `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${i}`
+        );
+      }
     });
 
     if (row === 6) {
       row = 0;
-      // addRowSpacer();
     } else {
       row++;
     }
