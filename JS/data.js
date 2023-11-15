@@ -13,6 +13,7 @@ const monthNames = [
   "November",
   "December",
 ];
+let selectedDay = null;
 
 async function fetchAPODsForPreviousMonth() {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
@@ -216,108 +217,6 @@ function drawBarGraph(topWords, previousMonthName, previousYear) {
     .text("Frequency");
 }
 
-async function createSolarSystem() {
-  const width = 800;
-  const height = 800;
-
-  const svg = d3
-    .select("#solar-system-svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  const sunGradient = svg
-    .append("defs")
-    .append("radialGradient")
-    .attr("id", "sunGradient")
-    .attr("cx", "50%")
-    .attr("cy", "50%")
-    .attr("r", "50%")
-    .attr("fx", "50%")
-    .attr("fy", "50%");
-
-  sunGradient
-    .append("stop")
-    .attr("offset", "0%")
-    .attr("style", "stop-color: #ffcc00");
-  sunGradient
-    .append("stop")
-    .attr("offset", "30%")
-    .attr("style", "stop-color: #ff9933");
-  sunGradient
-    .append("stop")
-    .attr("offset", "50%")
-    .attr("style", "stop-color: #ff751a");
-  sunGradient
-    .append("stop")
-    .attr("offset", "70%")
-    .attr("style", "stop-color: #ff3300");
-  sunGradient
-    .append("stop")
-    .attr("offset", "100%")
-    .attr("style", "stop-color: #ff1a1a");
-
-  svg
-    .append("circle")
-    .attr("cx", width / 2)
-    .attr("cy", height / 2)
-    .attr("r", 60)
-    .style("fill", "url(#sunGradient)")
-    .style("stroke", "none");
-
-  const orbits = [
-    { radius: 180, color: "lightblue" },
-    { radius: 260, color: "lightgreen" },
-    { radius: 360, color: "lightgrey" },
-  ];
-
-  svg
-    .selectAll(".orbit")
-    .data(orbits)
-    .enter()
-    .append("circle")
-    .attr("cx", width / 2)
-    .attr("cy", height / 2)
-    .attr("r", (d) => d.radius)
-    .style("fill", "none")
-    .style("stroke", (d) => d.color);
-
-  const planetGroups = svg
-    .selectAll(".planet")
-    .data([
-      { angle: 0, speed: 0.8, distance: 180, color: "../images/first.jpg" },
-      { angle: 0, speed: 0.3, distance: 260, color: "../images/second.jpg" },
-      { angle: 0, speed: 1, distance: 360, color: "../images/third.jpg" },
-    ])
-    .enter()
-    .append("g")
-    .attr("class", "planet");
-  planetGroups.each(function (d) {
-    d3.select(this)
-      .append("image")
-      .attr("xlink:href", d.color)
-      .attr("width", 70)
-      .attr("height", 70)
-      .attr("x", width / 2 + d.distance - 35)
-      .attr("y", height / 2 - 35);
-  });
-
-  function animatePlanets() {
-    planetGroups.each(function (d) {
-      d.angle += d.speed * 0.005;
-      d3.select(this)
-        .select("image")
-        .attr("x", width / 2 + d.distance * Math.cos(d.angle) - 35)
-        .attr("y", height / 2 + d.distance * Math.sin(d.angle) - 35);
-    });
-
-    requestAnimationFrame(animatePlanets);
-  }
-
-  animatePlanets();
-}
-
-let selectedDay = null;
-
 function drawCalendar(containerElement, currentDate) {
   d3.select(containerElement).select(".calendar-container").remove();
 
@@ -440,6 +339,120 @@ function closeModal() {
   const modal = document.getElementById("modal");
   modal.style.display = "none";
 }
+async function createSolarSystem() {
+  const width = 800;
+  const height = 800;
+
+  const svg = d3
+    .select("#solar-system-svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  const sunGradient = svg
+    .append("defs")
+    .append("radialGradient")
+    .attr("id", "sunGradient")
+    .attr("cx", "50%")
+    .attr("cy", "50%")
+    .attr("r", "50%")
+    .attr("fx", "50%")
+    .attr("fy", "50%");
+
+  sunGradient
+    .append("stop")
+    .attr("offset", "0%")
+    .attr("style", "stop-color: #ffcc00");
+  sunGradient
+    .append("stop")
+    .attr("offset", "30%")
+    .attr("style", "stop-color: #ff9933");
+  sunGradient
+    .append("stop")
+    .attr("offset", "50%")
+    .attr("style", "stop-color: #ff751a");
+  sunGradient
+    .append("stop")
+    .attr("offset", "70%")
+    .attr("style", "stop-color: #ff3300");
+  sunGradient
+    .append("stop")
+    .attr("offset", "100%")
+    .attr("style", "stop-color: #ff1a1a");
+
+  svg
+    .append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", 60)
+    .style("fill", "url(#sunGradient)")
+    .style("stroke", "none");
+
+  const orbits = [
+    { radius: 180, color: "lightblue" },
+    { radius: 260, color: "lightgreen" },
+    { radius: 360, color: "lightgrey" },
+  ];
+
+  svg
+    .selectAll(".orbit")
+    .data(orbits)
+    .enter()
+    .append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", (d) => d.radius)
+    .style("fill", "none")
+    .style("stroke", (d) => d.color);
+
+  const planetGroups = svg
+    .selectAll(".planet")
+    .data([
+      { angle: 0, speed: 0.8, distance: 180, image: "../images/first.jpg" },
+      { angle: 0, speed: 0.3, distance: 260, image: "../images/second.jpg" },
+      { angle: 0, speed: 1, distance: 360, image: "../images/third.jpg" },
+    ])
+    .enter()
+    .append("g")
+    .attr("class", "planet");
+
+  planetGroups.each(function (d) {
+    const patternId = `pattern-${d.image.replace(/\W/g, "_")}`;
+
+    svg
+      .append("defs")
+      .append("pattern")
+      .attr("id", patternId)
+      .attr("width", 2)
+      .attr("height", 2)
+      .append("image")
+      .attr("width", 70)
+      .attr("height", 70)
+      .attr("xlink:href", d.image);
+
+    d3.select(this)
+      .append("circle")
+      .attr("cx", width / 2 + d.distance)
+      .attr("cy", height / 2 + d.distance)
+      .attr("r", 30)
+      .style("fill", `url(#${patternId})`)
+      .style("stroke", "white")
+      .style("stroke-width", 0.1);
+  });
+
+  function animatePlanets() {
+    planetGroups.each(function (d) {
+      d.angle += d.speed * 0.005;
+      d3.select(this)
+        .select("circle")
+        .attr("cx", width / 2 + d.distance * Math.cos(d.angle))
+        .attr("cy", height / 2 + d.distance * Math.sin(d.angle));
+    });
+
+    requestAnimationFrame(animatePlanets);
+  }
+
+  animatePlanets();
+}
 
 async function fetchCalendarAPOD(year, month, day) {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
@@ -450,8 +463,122 @@ async function fetchCalendarAPOD(year, month, day) {
   return data;
 }
 
-const calendarContainer = document.getElementById("calendar-container");
-drawCalendar(calendarContainer, new Date());
+async function fetchAPODTitlesForYear(year) {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
+  const startDate = `${year}-01-01`;
+  const endDate = `${year}-01-31`;
 
-// createSolarSystem();
-// fetchAPODs();
+  const excludedWords = [
+    "the",
+    "a",
+    "an",
+    "and",
+    "or",
+    "but",
+    "of",
+    "with",
+    "at",
+    "by",
+    "in",
+    "from",
+  ];
+
+  const wordFrequencyMap = new Map();
+
+  try {
+    const startDateTime = new Date(startDate).getTime();
+    const endDateTime = new Date(endDate).getTime();
+    const apiUrl = "https://api.nasa.gov/planetary/apod";
+
+    for (
+      let currentDateTime = startDateTime;
+      currentDateTime <= endDateTime;
+      currentDateTime += 86400000
+    ) {
+      const currentDate = new Date(currentDateTime);
+      const formattedDate = currentDate.toISOString().split("T")[0];
+
+      const response = await fetch(
+        `${apiUrl}?api_key=${apiKey}&date=${formattedDate}`
+      );
+      const apodData = await response.json();
+
+      if (apodData.title) {
+        const words = apodData.title.toLowerCase().split(/\s+/);
+
+        words.forEach((word) => {
+          const cleanedWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+          if (cleanedWord.length > 0 && !excludedWords.includes(cleanedWord)) {
+            const count = wordFrequencyMap.get(cleanedWord) || 0;
+            wordFrequencyMap.set(cleanedWord, count + 1);
+          }
+        });
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching APOD titles:", error);
+  }
+
+  return wordFrequencyMap;
+}
+
+function getTopWords(wordFrequencyMap, topN) {
+  const sortedWords = [...wordFrequencyMap.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, topN);
+
+  return sortedWords;
+}
+
+async function displayTopWords() {
+  try {
+    const wordFrequencyMap = await fetchAPODTitlesForYear(2023);
+    const topWords = getTopWords(wordFrequencyMap, 10);
+
+    console.log("Top 10 words and their occurrences:");
+    topWords.forEach(([word, count]) => {
+      console.log(`${word}: ${count}`);
+    });
+
+    createWordCloud("#word-cloud-container", topWords);
+  } catch (error) {
+    console.error("Error fetching and displaying top words:", error);
+  }
+}
+
+function createRandomCircles(containerSelector, numCircles) {
+  const svg = d3.select(containerSelector);
+  const width = 800;
+  const height = 400;
+
+  const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+  const circles = Array.from({ length: numCircles }, (_, index) => ({
+    id: index,
+    x: Math.random() * (width - 30) + 30,
+    y: Math.random() * (height - 30) + 30,
+    radius: Math.random() * 30 + 10,
+  }));
+
+  svg
+    .selectAll("circle")
+    .data(circles)
+    .enter()
+    .append("circle")
+    .attr("class", "circle")
+    .attr("cx", (d) => d.x)
+    .attr("cy", (d) => d.y)
+    .attr("r", (d) => d.radius)
+    .attr("fill", (d, i) => colorScale(i));
+
+  // Log circles data to console for debugging
+  console.log(circles);
+}
+
+createRandomCircles("#word-cloud-container", 5);
+
+//displayTopWords();
+//const calendarContainer = document.getElementById("calendar-container");
+//drawCalendar(calendarContainer, new Date());
+//createSolarSystem();
+//fetchAPODs();
