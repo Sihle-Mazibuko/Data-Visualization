@@ -132,8 +132,8 @@ function getTopWords(titles) {
 
 function drawBarGraph(topWords, previousMonthName, previousYear) {
   d3.select("#bar-graph svg").remove();
-  const margin = { top: 60, right: 60, bottom: 80, left: 80 };
 
+  const margin = { top: 60, right: 60, bottom: 80, left: 80 };
   const width = 1100 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
 
@@ -151,7 +151,11 @@ function drawBarGraph(topWords, previousMonthName, previousYear) {
     .range([0, width])
     .padding(0.1);
 
-  const yScale = d3.scaleLinear().domain([0, 10]).nice().range([height, 0]);
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(topWords, (d) => d.count)])
+    .nice()
+    .range([height, 0]);
 
   svg
     .selectAll(".bar")
@@ -160,10 +164,16 @@ function drawBarGraph(topWords, previousMonthName, previousYear) {
     .append("rect")
     .attr("class", "bar")
     .attr("x", (d) => xScale(d.word))
-    .attr("y", (d) => yScale(d.count))
     .attr("width", xScale.bandwidth())
-    .attr("height", (d) => height - yScale(d.count))
-    .attr("fill", "red");
+    .attr("fill", "red")
+    .attr("y", (d) => {
+      const barHeight = height - yScale(d.count);
+      return isNaN(barHeight) ? 0 : barHeight;
+    })
+    .attr("height", (d) => {
+      const barHeight = height - yScale(d.count);
+      return isNaN(barHeight) ? 0 : barHeight;
+    });
 
   svg
     .append("g")
@@ -180,7 +190,10 @@ function drawBarGraph(topWords, previousMonthName, previousYear) {
     .append("text")
     .attr("class", "bar-label")
     .attr("x", (d) => xScale(d.word) + xScale.bandwidth() / 2)
-    .attr("y", (d) => yScale(d.count) - 10)
+    .attr("y", (d) => {
+      const barHeight = height - yScale(d.count);
+      return isNaN(barHeight) ? 0 : barHeight - 10;
+    })
     .text((d) => d.count)
     .style("text-anchor", "middle")
     .style("fill", "white");
@@ -473,7 +486,7 @@ function calculateWordFrequencies(words) {
 async function fetchAPODTitlesForYear(year) {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const startDate = `${year}-01-01`;
-  const endDate = `${year}-06-30`;
+  const endDate = `${year}-05-30`;
 
   const excludedWords = [
     "the",
@@ -633,9 +646,9 @@ async function postcardapod() {
   }
 }
 
-//postcardapod();
+fetchAPODs();
+postcardapod();
 displayPieChart();
-//const calendarContainer = document.getElementById("calendar-container");
-//drawCalendar(calendarContainer, new Date());
-//createSolarSystem();
-//fetchAPODs();
+const calendarContainer = document.getElementById("calendar-container");
+drawCalendar(calendarContainer, new Date());
+createSolarSystem();
