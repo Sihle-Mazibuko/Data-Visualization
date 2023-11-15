@@ -49,29 +49,6 @@ svg {
   }
 }
 
-@media (max-width: 1425px) {
-  #b-graph {
-    padding: 70px 3%;
-  }
-}
-
-@media (max-width: 900px) {
-  #b-graph {
-    padding: 50% 7%;
-    transition: 0.3s;
-  }
-  .calendar-container {
-    width: 100%;
-  }
-}
-
-@media (max-width: 550px) {
-  #b-graph {
-    padding: 40% 10%;
-    transition: 0.3s;
-  }
-}
-
 .section-heading {
   text-transform: uppercase;
   font-weight: 800;
@@ -244,23 +221,6 @@ svg {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 788px) {
-  .calendar-container {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .calendar-day {
-    height: 40px;
-    line-height: 40px;
-    font-size: 12px;
-  }
-
-  .calendar-header {
-    font-size: 18px;
-  }
-}
-
 #prev-month,
 #next-month {
   background-color: rgba(0, 0, 0, 0.377);
@@ -350,16 +310,6 @@ svg {
   font-family: "Brush Script MT", cursive;
 }
 
-@media (max-width: 780px) {
-  #container {
-    max-width: 70%;
-  }
-
-  #card {
-    transform: rotateY(0deg);
-  }
-
-  #pie-chart-container {
-    max-width: 100%;
-  }
+#b-graph {
+  text-align: center;
 }

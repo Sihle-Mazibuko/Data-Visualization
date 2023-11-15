@@ -14,107 +14,58 @@ const monthNames = [
   "December",
 ];
 let selectedDay = null;
+const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
 
-async function fetchAPODsForPreviousMonth() {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-  const titles = [];
-
+async function getTopWordsFromPreviousMonth() {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1;
-
   const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
   const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
-
   const daysInMonth = new Date(previousYear, previousMonth, 0).getDate();
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    const date = `${previousYear}-${previousMonth
-      .toString()
-      .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-
-      if (data.date && data.title && data.url) {
-        titles.push(data.title);
-      }
-    } catch (error) {
-      console.error(`Error fetching data for ${date}: ${error}`);
-    }
-  }
-
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const previousMonthName = monthNames[previousMonth - 1];
-  const heading = document.getElementById("graph-title");
-  const monthYear = document.getElementById("month-year");
-  monthYear.textContent = `${previousMonthName} ${previousYear}`;
-  heading.textContent = `Top Words For ${previousMonthName} ${previousYear}`;
-
-  const topWords = getTopWords(titles);
-  drawBarGraph(topWords, previousMonthName, previousYear);
-}
-
-async function fetchAPODs() {
-  await fetchAPODsForPreviousMonth();
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const titles = [];
 
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
+  try {
+    const apiPromises = Array.from({ length: daysInMonth }, (_, day) => {
+      const date = `${previousYear}-${String(previousMonth).padStart(
+        2,
+        "0"
+      )}-${String(day + 1).padStart(2, "0")}`;
+      const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
 
-  const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
-  const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+      return fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.date && data.title && data.url) {
+            titles.push(data.title);
+          }
+        })
+        .catch((error) => {
+          console.error(`Error fetching data for ${date}: ${error}`);
+        });
+    });
 
-  const daysInMonth = new Date(previousYear, previousMonth, 0).getDate();
+    await Promise.all(apiPromises);
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    const date = `${previousYear}-${previousMonth
-      .toString()
-      .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-
-      if (data.date && data.title && data.url) {
-        titles.push(data.title);
-      }
-    } catch (error) {
-      console.error(`Error fetching data for ${date}: ${error}`);
-    }
+    const topWords = calculateTopWords(titles, 6);
+    return topWords;
+  } catch (error) {
+    console.error("Error fetching data from APOD API:", error);
+    throw error;
   }
-
-  const topWords = getTopWords(titles);
-  drawBarGraph(topWords);
 }
 
-function getTopWords(titles) {
+function calculateTopWords(titles, topCount) {
   const titlesWords = titles
     .join(" ")
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "")
     .toLowerCase();
+
   const words = titlesWords.split(/\s+/);
   const ignore = ["a", "an", "the", "and", "of", "in", "from"];
-  const wordCount = {};
 
+  const wordCount = {};
   words.forEach((word) => {
     if (!ignore.includes(word)) {
       wordCount[word] = (wordCount[word] || 0) + 1;
@@ -125,109 +76,87 @@ function getTopWords(titles) {
     word,
     count,
   }));
+
   wordCountArray.sort((a, b) => b.count - a.count);
 
-  return wordCountArray.slice(0, 5);
+  return wordCountArray.slice(0, topCount);
 }
 
-function drawBarGraph(topWords, previousMonthName, previousYear) {
-  d3.select("#bar-graph svg").remove();
+async function drawBarGraph() {
+  try {
+    const topWords = await getTopWordsFromPreviousMonth();
 
-  const margin = { top: 60, right: 60, bottom: 80, left: 80 };
-  const width = 1100 - margin.left - margin.right;
-  const height = 600 - margin.top - margin.bottom;
+    const margin = { top: 20, right: 20, bottom: 60, left: 40 };
+    const width = 600 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
 
-  const svg = d3
-    .select("#bar-graph")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+    const svg = d3
+      .select("#bar-chart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  const xScale = d3
-    .scaleBand()
-    .domain(topWords.map((d) => d.word))
-    .range([0, width])
-    .padding(0.1);
+    const x = d3
+      .scaleBand()
+      .range([0, width])
+      .padding(0.1)
+      .domain(topWords.map((d) => d.word));
 
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(topWords, (d) => d.count)])
-    .nice()
-    .range([height, 0]);
+    const y = d3.scaleLinear().range([height, 0]).domain([0, 7]);
 
-  svg
-    .selectAll(".bar")
-    .data(topWords)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("x", (d) => xScale(d.word))
-    .attr("width", xScale.bandwidth())
-    .attr("fill", "red")
-    .attr("y", (d) => {
-      const barHeight = height - yScale(d.count);
-      return isNaN(barHeight) ? 0 : barHeight;
-    })
-    .attr("height", (d) => {
-      const barHeight = height - yScale(d.count);
-      return isNaN(barHeight) ? 0 : barHeight;
-    });
+    svg
+      .append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .append("text")
+      .attr("x", width / 2)
+      .attr("y", 40)
+      .attr("dy", "0.71rem")
+      .style("text-anchor", "middle")
+      .style("fill", "white")
+      .style("font-size", "12px")
+      .text("Words");
 
-  svg
-    .append("g")
-    .attr("class", "x-axis")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(xScale));
+    svg
+      .append("g")
+      .call(d3.axisLeft(y))
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -margin.left - 2)
+      .attr("x", -height / 2)
+      .attr("dy", "0.71rem")
+      .style("text-anchor", "middle")
+      .style("fill", "white")
+      .style("font-size", "12px")
+      .text("Frequency");
 
-  svg.append("g").attr("class", "y-axis").call(d3.axisLeft(yScale).ticks(10));
+    svg
+      .selectAll("rect")
+      .data(topWords)
+      .enter()
+      .append("rect")
+      .style("fill", "red")
+      .attr("x", (d) => x(d.word))
+      .attr("width", x.bandwidth())
+      .attr("y", (d) => y(d.count))
+      .attr("height", (d) => height - y(d.count));
 
-  svg
-    .selectAll(".bar-label")
-    .data(topWords)
-    .enter()
-    .append("text")
-    .attr("class", "bar-label")
-    .attr("x", (d) => xScale(d.word) + xScale.bandwidth() / 2)
-    .attr("y", (d) => {
-      const barHeight = height - yScale(d.count);
-      return isNaN(barHeight) ? 0 : barHeight - 10;
-    })
-    .text((d) => d.count)
-    .style("text-anchor", "middle")
-    .style("fill", "white");
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
 
-  svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", -margin.top / 2)
-    .attr("text-anchor", "middle")
-    .style("font-size", "20px")
-    .style("fill", "white")
-    .classed("underline", true)
-    .text(
-      `Top 5 Most Common Words in the ${previousMonthName} ${previousYear} APOD`
-    );
+    const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+    const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    const previousMonthName = monthNames[previousMonth - 1];
 
-  svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", height + margin.bottom - 20)
-    .attr("text-anchor", "middle")
-    .style("font-size", "14px")
-    .style("fill", "white")
-    .text("Word");
-
-  svg
-    .append("text")
-    .attr("x", -height / 2)
-    .attr("y", -margin.left + 30)
-    .attr("text-anchor", "middle")
-    .attr("transform", "rotate(-90)")
-    .style("font-size", "14px")
-    .style("fill", "white")
-    .text("Frequency");
+    document.getElementById(
+      "chart-heading"
+    ).textContent = `Top Words for ${previousMonthName} ${previousYear}`;
+  } catch (error) {
+    console.error("Error drawing bar graph:", error);
+  }
 }
 
 function drawCalendar(containerElement, currentDate) {
@@ -352,9 +281,10 @@ function closeModal() {
   const modal = document.getElementById("modal");
   modal.style.display = "none";
 }
+
 async function createSolarSystem() {
-  const width = 800;
-  const height = 800;
+  let width = 800;
+  let height = 800;
 
   const svg = d3
     .select("#solar-system-svg")
@@ -468,13 +398,13 @@ async function createSolarSystem() {
 }
 
 async function fetchCalendarAPOD(year, month, day) {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const response = await fetch(
     `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${year}-${month}-${day}`
   );
   const data = await response.json();
   return data;
 }
+
 function calculateWordFrequencies(words) {
   const frequencies = {};
   words.forEach((word) => {
@@ -484,7 +414,6 @@ function calculateWordFrequencies(words) {
 }
 
 async function fetchAPODTitlesForYear(year) {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const startDate = `${year}-01-01`;
   const endDate = `${year}-05-30`;
 
@@ -568,9 +497,9 @@ function getTopWords(wordFrequencyMap, topN) {
 }
 
 function createPieChart(containerId, data) {
-  const width = 500;
-  const height = 500;
-  const radius = Math.min(width, height) / 2;
+  let width = 500;
+  let height = 500;
+  let radius = Math.min(width, height) / 2;
 
   const svg = d3
     .select(`#${containerId}`)
@@ -626,8 +555,6 @@ async function displayPieChart() {
 }
 
 async function postcardapod() {
-  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
-
   const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
   try {
@@ -646,9 +573,27 @@ async function postcardapod() {
   }
 }
 
-fetchAPODs();
+drawBarGraph();
+getTopWordsFromPreviousMonth();
 postcardapod();
 displayPieChart();
 const calendarContainer = document.getElementById("calendar-container");
 drawCalendar(calendarContainer, new Date());
 createSolarSystem();
+
+window.addEventListener("resize", adjustSectionSize);
+
+function adjustSectionSize() {
+  const sectionElement = document.querySelector(".section");
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 600) {
+    sectionElement.style.width = "100%";
+  } else if (screenWidth <= 480) {
+    sectionElement.style.width = "80%";
+  } else if (screenWidth <= 320) {
+    sectionElement.style.width = "60%";
+  } else {
+    sectionElement.style.width = "90%";
+  }
+}
