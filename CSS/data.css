@@ -291,3 +291,75 @@ svg {
   margin: 20px auto;
   text-transform: uppercase;
 }
+
+#container {
+  perspective: 1000px;
+  width: 600px;
+  height: 350px;
+  margin-left: 100px;
+}
+
+#card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+#card:hover {
+  transform: rotateY(180deg);
+}
+
+#front,
+#back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+#front {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#back {
+  background: none;
+  transform: rotateY(180deg);
+  opacity: 0.7;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-height: 100%;
+  overflow: auto;
+  background-color: transparent;
+}
+
+.content p {
+  font-size: 36px;
+  background-color: transparent;
+  font-family: "Brush Script MT", cursive;
+}
+
+@media (max-width: 780px) {
+  #container {
+    max-width: 70%;
+  }
+
+  #card {
+    transform: rotateY(0deg);
+  }
+
+  #pie-chart-container {
+    max-width: 100%;
+  }
+}

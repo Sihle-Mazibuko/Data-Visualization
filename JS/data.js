@@ -612,7 +612,29 @@ async function displayPieChart() {
   }
 }
 
-//displayPieChart();
+async function postcardapod() {
+  const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
+
+  const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    d3.select("#front").style("background-image", `url(${data.url})`);
+
+    d3.select("#back")
+      .style("background-image", `url(${data.url})`)
+      .html(
+        `<p>Title: ${data.title}</p><p>Date: ${data.date}</p><p>From: Sihle</p>`
+      );
+  } catch (error) {
+    console.error("Error fetching APOD:", error);
+  }
+}
+
+//postcardapod();
+displayPieChart();
 //const calendarContainer = document.getElementById("calendar-container");
 //drawCalendar(calendarContainer, new Date());
 //createSolarSystem();
