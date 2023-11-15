@@ -49,17 +49,12 @@
 
       <ul class="navlist">
         <li>
-          <a href="https://sihle-mazibuko.github.io/Data-Visualization/"
-            >Home</a
-          >
+          <p id="home-link">Home</p>
         </li>
         <li>
-          <a
-            href="https://sihle-mazibuko.github.io/Data-Visualization/html/blogs.html"
-            >Blogs</a
-          >
+          <p id="blog-link">Blogs</p>
         </li>
-        <li><a href="#">Data Visualisations</a></li>
+        <li><p id="data-link">Data Visualisations</p></li>
       </ul>
     </header>
     <main>
@@ -72,9 +67,10 @@
       <aside class="sticky-nav-box">
         <h2>Data Page</h2>
         <a class="box-nav-link" href="#b-graph">Bar Graph</a>
-        <a class="box-nav-link" href="#slide-show">Word Cloud</a>
+        <a class="box-nav-link" href="#pie-chart">Pie Chart</a>
         <a class="box-nav-link" href="#calender">Calender</a>
         <a class="box-nav-link" href="#data-artwork">Data Artwork</a>
+        <a class="box-nav-link" href="#exam-artwork">Exam Artwork</a>
       </aside>
 
       <h1>APOD Data</h1>
@@ -98,25 +94,32 @@
         <figure id="bar-graph"></figure>
       </section>
 
-      <section id="wc-cloud">
-        <h2 class="section-heading" id="wc-title">Word Cloud Network</h2>
-        <article class="wc-i i">
-          <p>
-            To further understand what APOD means the title of the images can
-            help provide links to what themes and ideas may be common in this
-            API.
+      <section id="pie-chart">
+        <h2 class="section-heading" id="wc-title">Pie Chart</h2>
+        <article class="pie-chart-i i">
+          <p class="i">
+            Below is a pie that shows the top 5 words from January to June. From
+            this we can understand what was the general theme for the first half
+            of the year in terms of selecting APODS.
           </p>
           <p>
-            Below is a network graph that shows not only the top 10 words for
-            the entire year but also their relation to other top words for the
-            viewers benefit of understanding common themes.
+            The top words as well as their frequencies are depicted for the
+            viewers pleasure of knowing the most popular photography theme for
+            the year and this month range is due to limitations in data
+            availability as other elements of the site need to share the data.
           </p>
         </article>
+
+        <div id="pie-chart-container"></div>
       </section>
 
       <section id="calendar">
         <h2 class="section-heading">Calender</h2>
         <article class="calender-i i">
+          <p>
+            Due to APOD providing content everyday sometimes you may miss some
+            stunning images from the APOD collection
+          </p>
           <p>
             The following interactive calender gives the users a chance to look
             back on all the APODS they may have missed in the current month
@@ -147,13 +150,29 @@
             <a
               href="https://orbitingfrog.com/2007/08/29/top-ten-astronomy-pictures-of-the-day-apod/"
               >orbitingfrog.com</a
-            >) to create a star system of APODs
+            >) to create a star system of APODs. This is for the benefit of
+            seeing what certain pictures would look like as pictures and the
+            results are interesting to say the least
           </p>
         </article>
 
         <figure class="solar-system">
           <svg id="solar-system-svg"></svg>
         </figure>
+      </section>
+
+      <section id="exam-artwork">
+        <article class="exam-art">
+          <h2 class="section-heading">Exam Data Driven Artwork</h2>
+          <p class="i">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia
+            earum illum necessitatibus asperiores, ex temporibus, ratione
+            aperiam explicabo tempora veniam iste dolore culpa voluptate dolorem
+            soluta quisquam. Sapiente, beatae unde.
+          </p>
+        </article>
+
+        <div id="book-container"></div>
       </section>
     </main>
 
@@ -162,5 +181,6 @@
     </footer>
     <script type="text/javascript" src="../JS/app.js"></script>
     <script type="text/javascript" src="../JS/data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.js"></script>
   </body>
 </html>

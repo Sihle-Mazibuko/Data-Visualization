@@ -462,11 +462,18 @@ async function fetchCalendarAPOD(year, month, day) {
   const data = await response.json();
   return data;
 }
+function calculateWordFrequencies(words) {
+  const frequencies = {};
+  words.forEach((word) => {
+    frequencies[word] = (frequencies[word] || 0) + 1;
+  });
+  return frequencies;
+}
 
 async function fetchAPODTitlesForYear(year) {
   const apiKey = "8yTheQIGpatO25KHaczru6p8jd3Z2HlAU0InUaKD";
   const startDate = `${year}-01-01`;
-  const endDate = `${year}-01-31`;
+  const endDate = `${year}-06-30`;
 
   const excludedWords = [
     "the",
@@ -490,6 +497,8 @@ async function fetchAPODTitlesForYear(year) {
     const endDateTime = new Date(endDate).getTime();
     const apiUrl = "https://api.nasa.gov/planetary/apod";
 
+    const requests = [];
+
     for (
       let currentDateTime = startDateTime;
       currentDateTime <= endDateTime;
@@ -498,23 +507,38 @@ async function fetchAPODTitlesForYear(year) {
       const currentDate = new Date(currentDateTime);
       const formattedDate = currentDate.toISOString().split("T")[0];
 
-      const response = await fetch(
-        `${apiUrl}?api_key=${apiKey}&date=${formattedDate}`
-      );
-      const apodData = await response.json();
+      const request = fetch(`${apiUrl}?api_key=${apiKey}&date=${formattedDate}`)
+        .then((response) => response.json())
+        .then((apodData) => {
+          if (apodData.title) {
+            const words = apodData.title.toLowerCase().split(/\s+/);
 
-      if (apodData.title) {
-        const words = apodData.title.toLowerCase().split(/\s+/);
-
-        words.forEach((word) => {
-          const cleanedWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-          if (cleanedWord.length > 0 && !excludedWords.includes(cleanedWord)) {
-            const count = wordFrequencyMap.get(cleanedWord) || 0;
-            wordFrequencyMap.set(cleanedWord, count + 1);
+            words.forEach((word) => {
+              const cleanedWord = word.replace(
+                /[.,\/#!$%\^&\*;:{}=\-_`~()]/g,
+                ""
+              );
+              if (
+                cleanedWord.length > 0 &&
+                !excludedWords.includes(cleanedWord)
+              ) {
+                const count = wordFrequencyMap.get(cleanedWord) || 0;
+                wordFrequencyMap.set(cleanedWord, count + 1);
+              }
+            });
           }
-        });
-      }
+        })
+        .catch((error) =>
+          console.error(
+            `Error fetching APOD titles for ${formattedDate}:`,
+            error
+          )
+        );
+
+      requests.push(request);
     }
+
+    await Promise.all(requests);
   } catch (error) {
     console.error("Error fetching APOD titles:", error);
   }
@@ -530,54 +554,65 @@ function getTopWords(wordFrequencyMap, topN) {
   return sortedWords;
 }
 
-async function displayTopWords() {
+function createPieChart(containerId, data) {
+  const width = 500;
+  const height = 500;
+  const radius = Math.min(width, height) / 2;
+
+  const svg = d3
+    .select(`#${containerId}`)
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", `translate(${width / 2},${height / 2})`);
+
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  const pie = d3.pie().value((d) => d.value);
+
+  const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+  const arcs = svg
+    .selectAll("arc")
+    .data(pie(data))
+    .enter()
+    .append("g")
+    .attr("class", "arc");
+
+  arcs
+    .append("path")
+    .attr("d", arc)
+    .attr("fill", (d, i) => color(i));
+
+  arcs
+    .append("text")
+    .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+    .attr("text-anchor", "middle")
+    .text((d) => `${d.data.label} (${d.data.value})`);
+}
+
+async function displayPieChart() {
   try {
     const wordFrequencyMap = await fetchAPODTitlesForYear(2023);
-    const topWords = getTopWords(wordFrequencyMap, 10);
+    const topWords = getTopWords(wordFrequencyMap, 5);
 
-    console.log("Top 10 words and their occurrences:");
+    console.log("Top 5 words and their occurrences:");
     topWords.forEach(([word, count]) => {
       console.log(`${word}: ${count}`);
     });
 
-    createWordCloud("#word-cloud-container", topWords);
+    const topWordsData = topWords.map(([label, value]) => ({ label, value }));
+    createPieChart("pie-chart-container", topWordsData);
   } catch (error) {
-    console.error("Error fetching and displaying top words:", error);
+    console.error(
+      "Error fetching APOD titles and displaying pie chart:",
+      error
+    );
   }
 }
 
-function createRandomCircles(containerSelector, numCircles) {
-  const svg = d3.select(containerSelector);
-  const width = 800;
-  const height = 400;
-
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
-  const circles = Array.from({ length: numCircles }, (_, index) => ({
-    id: index,
-    x: Math.random() * (width - 30) + 30,
-    y: Math.random() * (height - 30) + 30,
-    radius: Math.random() * 30 + 10,
-  }));
-
-  svg
-    .selectAll("circle")
-    .data(circles)
-    .enter()
-    .append("circle")
-    .attr("class", "circle")
-    .attr("cx", (d) => d.x)
-    .attr("cy", (d) => d.y)
-    .attr("r", (d) => d.radius)
-    .attr("fill", (d, i) => colorScale(i));
-
-  // Log circles data to console for debugging
-  console.log(circles);
-}
-
-createRandomCircles("#word-cloud-container", 5);
-
-//displayTopWords();
+//displayPieChart();
 //const calendarContainer = document.getElementById("calendar-container");
 //drawCalendar(calendarContainer, new Date());
 //createSolarSystem();

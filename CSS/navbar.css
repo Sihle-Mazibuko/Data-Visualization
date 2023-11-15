@@ -44,17 +44,17 @@ header {
   background: none;
 }
 
-.navlist a {
+.navlist p {
   font-size: 1.3rem;
   font-weight: 600;
   padding: 10px 50px;
   color: rgba(255, 255, 255, 0.382);
   background: none;
 }
-.navlist a:hover {
+.navlist p:hover {
   color: white;
 }
-.navlist a::after {
+.navlist p::after {
   content: "";
   position: absolute;
   width: 0;
@@ -65,7 +65,7 @@ header {
   transition: ease 0.4s;
 }
 
-.navlist a:hover::after {
+.navlist p:hover::after {
   width: 100%;
 }
 
@@ -114,7 +114,7 @@ header.sticky {
     text-align: center;
     transition: all 0.4s;
   }
-  .navlist a {
+  .navlist p {
     display: block;
     padding: 0.8rem;
     margin: 0.5rem;
@@ -122,11 +122,11 @@ header.sticky {
     border-right: 2px solid #aa2704;
     border-left: 2px solid #aa2704;
   }
-  .navlist a:hover {
+  .navlist p:hover {
     background: #aa2704;
     color: black;
   }
-  .navlist a::after {
+  .navlist p::after {
     top: none;
   }
 

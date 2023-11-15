@@ -285,7 +285,9 @@ svg {
   color: white;
 }
 
-.circle {
-  stroke: white;
-  stroke-width: 0.3px;
+#pie-chart-container {
+  width: 400px;
+  height: 400px;
+  margin: 20px auto;
+  text-transform: uppercase;
 }

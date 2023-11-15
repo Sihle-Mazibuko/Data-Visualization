@@ -54,6 +54,7 @@ section {
 .blog-menu {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -66,6 +67,8 @@ section {
   border: 2px solid transparent;
   transition: background-color 0.3s, border-radius 0.3s, color 0.3s,
     border-color 0.3s;
+  flex: 1;
+  max-width: calc(33.33% - 20px);
 }
 
 .btn.active,
@@ -104,4 +107,10 @@ section {
 img {
   max-width: 100%;
   height: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .btn {
+    max-width: 100%;
+  }
 }
